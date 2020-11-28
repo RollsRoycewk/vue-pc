@@ -1,7 +1,7 @@
 <template>
   <div>
     Login
-    <button @click="handleLoginAsync">按钮</button>
+    <el-button type="warning" @click="handleLoginAsync">按钮</el-button>
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
     handleLoginAsync() {
       loginAsync({
         phone: "13700000000",
-        password: "111111",
+        password: "1111112",
       });
     },
   },

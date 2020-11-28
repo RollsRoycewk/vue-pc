@@ -16,4 +16,18 @@ module.exports = {
       },
     },
   },
+
+  // 改了配置,一定要重启才能生效
+  devServer: {
+    proxy: {
+      "/api": {
+        target: "http://182.92.128.115",
+        changeOrigin: true, // 允许跨域
+        // pathRewrite: {
+        //   // 路径重写
+        //   "^api": "",
+        // },
+      },
+    },
+  },
 };

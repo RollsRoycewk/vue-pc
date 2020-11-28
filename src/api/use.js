@@ -14,6 +14,8 @@ export const loginAsync = function({ phone, password }) {
       return result;
     })
     .catch((err) => {
+      //   console.dir(err);
+      //   return err.message || "网络错误";
       console.log("失败", err);
     });
 };
