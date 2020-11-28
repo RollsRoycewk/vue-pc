@@ -30,10 +30,15 @@
         </a>
       </h1>
       <div class="searchArea">
-        <form action="">
-          <input type="text" class="searchInput" placeholder="三星 苹果 锤子" />
-          <button class="searchBtn" @click="handleSearch">搜索</button>
-        </form>
+        <!-- <form action=""> -->
+        <input
+          type="text"
+          class="searchInput"
+          placeholder="三星 苹果 锤子"
+          v-model="searchText"
+        />
+        <button class="searchBtn" @click="handleSearch">搜索</button>
+        <!-- </form> -->
       </div>
     </div>
   </header>
@@ -42,9 +47,16 @@
 <script>
 export default {
   name: "Header",
+  data() {
+    return {
+      searchText: "",
+    };
+  },
   methods: {
     handleSearch() {
-      this.$router.push("/search");
+      const { searchText } = this;
+      const location = searchText ? `/${searchText}` : "";
+      this.$router.push("/search" + location);
     },
   },
 };
