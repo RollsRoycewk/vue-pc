@@ -7,7 +7,7 @@
           <p>
             <span>请</span>
             <router-link to="/login">登录</router-link>
-            <a href="###" class="resgis">免费注册</a>
+            <router-link to="/register" class="resgis">免费注册</router-link>
           </p>
         </div>
         <div class="infoNav">
@@ -25,9 +25,9 @@
 
     <div class="header-bottom">
       <h1 class="logoSearch">
-        <a href="##">
+        <router-link to="/">
           <img src="./images/logo.png" alt="" />
-        </a>
+        </router-link>
       </h1>
       <div class="searchArea">
         <!-- <form action=""> -->
@@ -67,9 +67,9 @@ export default {
       const { searchText } = this;
       const location = {
         name: "search",
-        query: {
-          rolls: "royce",
-        },
+        // query: {
+        //   rolls: "royce",
+        // },
       };
 
       if (searchText) {

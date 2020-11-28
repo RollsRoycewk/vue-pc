@@ -30,6 +30,7 @@ VueRouter.prototype.push = function(location, onComplete, onAbort = () => {}) {
   console.log(location);
   return push.call(this, location, onComplete, onAbort);
 };
+
 VueRouter.prototype.replace = function(
   location,
   onComplete,
