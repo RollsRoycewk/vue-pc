@@ -8,6 +8,37 @@ import Search from "../views/Search";
 
 Vue.use(VueRouter);
 
+const push = VueRouter.prototype.push;
+const replace = VueRouter.prototype.replace;
+
+// VueRouter.prototype.push = function(location, onComplete, onAbort) {
+//   if (onComplete && onAbort) {
+//     return push.call(this, location, onComplete, onAbort);
+//   }
+//   return push.call(this, location, onComplete, () => {});
+// };
+
+// VueRouter.prototype.replace = function(location, onComplete, onAbort) {
+//   if (onComplete && onAbort) {
+//     return replace.call(this, location, onComplete, onAbort);
+//   }
+//   return replace.call(this, location, onComplete, () => {});
+// };
+
+// // 简写形式
+VueRouter.prototype.push = function(location, onComplete, onAbort = () => {}) {
+  console.log(location);
+  return push.call(this, location, onComplete, onAbort);
+};
+VueRouter.prototype.replace = function(
+  location,
+  onComplete,
+  onAbort = () => {}
+) {
+  console.log(location);
+  return replace.call(this, location, onComplete, onAbort);
+};
+
 export default new VueRouter({
   routes: [
     {
