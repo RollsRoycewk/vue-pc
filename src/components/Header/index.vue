@@ -53,11 +53,41 @@ export default {
     };
   },
   methods: {
+    // 第一种方式
+    // handleSearch() {
+    //   const { searchText } = this;
+    //   const location = searchText ? `/${searchText}` : "";
+    //   this.$router.push("/search" + location);
+    // },
+
+    // 第三种方式,push也可以传入一个对象,但是使用动态路由要加name属性
+    // 只传query可以用path
+    // 注意要使用命名路由,而不是path,注意如果是空search就不见了,所以要判断
     handleSearch() {
       const { searchText } = this;
-      const location = searchText ? `/${searchText}` : "";
-      this.$router.push("/search" + location);
+      const location = {
+        name: "search",
+        query: {
+          rolls: "royce",
+        },
+      };
+
+      if (searchText) {
+        location.params = { searchText };
+      }
+
+      this.$router.push(location);
     },
+
+    // // 方式二,push传入一个对象
+    // handleSearch() {
+    //   this.$router.push({
+    //     path: "/search",
+    //     query: {
+    //       name: "rolls",
+    //     },
+    //   });
+    // },
   },
 };
 </script>
