@@ -27,7 +27,20 @@ import Rank from "./Rank/Rank";
 import TodayRecommend from "./TodayRecommend/TodayRecommend";
 import TypeNav from "@components/TypeNav";
 
+import { mapState, mapActions } from "vuex";
+
 export default {
+  methods: {
+    ...mapActions(["getSlideshowList"]),
+  },
+  computed: {
+    ...mapState({
+      slideshowList: (state) => state.home.slideshowList,
+    }),
+  },
+  mounted() {
+    this.getSlideshowList();
+  },
   name: "Home",
   components: {
     Brand,

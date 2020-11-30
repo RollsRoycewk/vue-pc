@@ -200,7 +200,7 @@ export default {
   },
   mounted() {
     // 先判断数据有没有,有就不发送请求了
-    if (!this.navList.length) return;
+    if (this.navList.length) return;
     this.getCategoryList();
   },
 };
