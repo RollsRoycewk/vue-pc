@@ -5,8 +5,12 @@
         <!--banner轮播-->
         <div class="swiper-container" id="mySwiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="./images/banner1.jpg" />
+            <div
+              class="swiper-slide"
+              v-for="item in slideshowList"
+              :key="item.id"
+            >
+              <img :src="`${item.imgUrl}`" />
             </div>
             <!-- <div class="swiper-slide">
               <img src="./images/banner2.jpg" />
