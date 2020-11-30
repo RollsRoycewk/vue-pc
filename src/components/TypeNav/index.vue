@@ -30,7 +30,7 @@
               > -->
 
               <!-- 第二种方式,编程式导航,会产生很多函数 -->
-              <a
+              <!-- <a
                 @click.prevent="
                   $router.push({
                     name: 'search',
@@ -41,15 +41,15 @@
                   })
                 "
                 >{{ oneList.categoryName }}</a
-              >
+              > -->
 
               <!-- 最终方式 -->
-              <!-- <a
+              <a
                 :data-categoryName="oneList.categoryName"
                 :data-categoryId="oneList.categoryId"
                 data-categoryType="1"
                 >{{ oneList.categoryName }}</a
-              > -->
+              >
             </h3>
             <div class="item-list clearfix">
               <div class="subitem">
@@ -68,7 +68,7 @@
                     > -->
 
                     <!-- 第二种方式,编程式导航 -->
-                    <a
+                    <!-- <a
                       @click.prevent="
                         $router.push({
                           name: 'search',
@@ -79,15 +79,15 @@
                         })
                       "
                       >{{ twoList.categoryName }}</a
-                    >
+                    > -->
 
                     <!-- 最终版 -->
-                    <!-- <a
+                    <a
                       :data-categoryName="twoList.categoryName"
                       :data-categoryId="twoList.categoryId"
                       data-categoryType="2"
                       >{{ twoList.categoryName }}</a
-                    > -->
+                    >
                   </dt>
                   <dd>
                     <em
@@ -103,7 +103,7 @@
                       > -->
 
                       <!-- 第二种方式,编程式导航 -->
-                      <a
+                      <!-- <a
                         @click.prevent="
                           $router.push({
                             name: 'search',
@@ -114,15 +114,15 @@
                           })
                         "
                         >{{ threeList.categoryName }}</a
-                      >
+                      > -->
 
                       <!--最终版  -->
-                      <!-- <a
+                      <a
                         :data-categoryName="threeList.categoryName"
                         :data-categoryId="threeList.categoryId"
                         data-categoryType="3"
                         >{{ threeList.categoryName }}</a
-                      > -->
+                      >
                     </em>
                   </dd>
                 </dl>
