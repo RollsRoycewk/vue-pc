@@ -75,6 +75,10 @@ export default {
       if (searchText) {
         location.params = { searchText };
       }
+      const { categoryName } = this.$route.query;
+      if (categoryName) {
+        location.query = this.$route.query;
+      }
 
       this.$router.push(location);
     },
