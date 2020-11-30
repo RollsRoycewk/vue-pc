@@ -30,18 +30,16 @@ import TypeNav from "@components/TypeNav";
 import { mapState, mapActions } from "vuex";
 
 export default {
-  methods: {
-    ...mapActions(["getSlideshowList"]),
-  },
+  name: "Home",
   computed: {
-    ...mapState({
-      slideshowList: (state) => state.home.slideshowList,
-    }),
+    ...mapState({ floorsList: (state) => state.home.floorsList }),
+  },
+  methods: {
+    ...mapActions(["getFloorsList"]),
   },
   mounted() {
-    this.getSlideshowList();
+    this.getFloorsList();
   },
-  name: "Home",
   components: {
     Brand,
     Floor,

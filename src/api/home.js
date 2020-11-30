@@ -19,3 +19,13 @@ export const getslideshow = () => {
     url: "/banners",
   });
 };
+
+/**
+ * 获取floors数据
+ */
+export const getfloors = () => {
+  return mockRequire({
+    method: "GET",
+    url: "/floors",
+  });
+};
