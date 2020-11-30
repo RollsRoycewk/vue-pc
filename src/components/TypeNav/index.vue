@@ -22,12 +22,34 @@
           >
             <h3>
               <!-- <a href="">{{ oneList.categoryName }}</a> -->
+
+              <!-- 第一种方式router-link会产生很多组件 -->
+              <!-- <router-link
+                :to="`/search/?categoryName=${oneList.categoryName}&category1Id=${oneList.categoryId}`"
+                >{{ oneList.categoryName }}</router-link
+              > -->
+
+              <!-- 第二种方式,编程式导航,会产生很多函数 -->
               <a
+                @click.prevent="
+                  $router.push({
+                    name: 'search',
+                    query: {
+                      category1Id: oneList.categoryId,
+                      categoryName: oneList.categoryName,
+                    },
+                  })
+                "
+                >{{ oneList.categoryName }}</a
+              >
+
+              <!-- 最终方式 -->
+              <!-- <a
                 :data-categoryName="oneList.categoryName"
                 :data-categoryId="oneList.categoryId"
                 data-categoryType="1"
                 >{{ oneList.categoryName }}</a
-              >
+              > -->
             </h3>
             <div class="item-list clearfix">
               <div class="subitem">
@@ -38,13 +60,34 @@
                 >
                   <dt>
                     <!-- <a href="">{{ twoList.categoryName }}</a> -->
-                    <!-- <a>{{ twoList.categoryName }}</a> -->
+
+                    <!-- 第一种方式router-link会产生很多组件 -->
+                    <!-- <router-link
+                      :to="`/search/?categoryName=${twoList.categoryName}&category2Id=${twoList.categoryId}`"
+                      >{{ twoList.categoryName }}</router-link
+                    > -->
+
+                    <!-- 第二种方式,编程式导航 -->
                     <a
+                      @click.prevent="
+                        $router.push({
+                          name: 'search',
+                          query: {
+                            category2Id: twoList.categoryId,
+                            categoryName: twoList.categoryName,
+                          },
+                        })
+                      "
+                      >{{ twoList.categoryName }}</a
+                    >
+
+                    <!-- 最终版 -->
+                    <!-- <a
                       :data-categoryName="twoList.categoryName"
                       :data-categoryId="twoList.categoryId"
                       data-categoryType="2"
                       >{{ twoList.categoryName }}</a
-                    >
+                    > -->
                   </dt>
                   <dd>
                     <em
@@ -52,13 +95,34 @@
                       :key="threeList.categoryId"
                     >
                       <!-- <a href="">{{ threeList.categoryName }}</a> -->
-                      <!-- <a>{{ threeList.categoryName }}</a> -->
+
+                      <!-- 第一种方式router-link会产生很多组件 -->
+                      <!-- <router-link
+                        :to="`/search/?categoryName=${threeList.categoryName}&category3Id=${threeList.categoryId}`"
+                        >{{ threeList.categoryName }}</router-link
+                      > -->
+
+                      <!-- 第二种方式,编程式导航 -->
                       <a
+                        @click.prevent="
+                          $router.push({
+                            name: 'search',
+                            query: {
+                              category3Id: threeList.categoryId,
+                              categoryName: threeList.categoryName,
+                            },
+                          })
+                        "
+                        >{{ threeList.categoryName }}</a
+                      >
+
+                      <!--最终版  -->
+                      <!-- <a
                         :data-categoryName="threeList.categoryName"
                         :data-categoryId="threeList.categoryId"
                         data-categoryType="3"
                         >{{ threeList.categoryName }}</a
-                      >
+                      > -->
                     </em>
                   </dd>
                 </dl>
