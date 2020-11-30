@@ -1,12 +1,14 @@
 <template>
   <!-- 商品分类导航 -->
   <div class="type-nav">
-    <div
-      class="container"
-      @mouseenter="isSideNavLoginShow = true"
-      @mouseleave="isSideNavLoginShow = false"
-    >
-      <h2 class="all">全部商品分类</h2>
+    <div class="container">
+      <h2
+        class="all"
+        @mouseleave="isSideNavLoginShow = false"
+        @mouseenter="isSideNavLoginShow = true"
+      >
+        全部商品分类
+      </h2>
       <nav class="nav">
         <a href="###">服装城</a>
         <a href="###">美妆馆</a>
@@ -19,7 +21,12 @@
       </nav>
       <!-- 过渡动画 -->
       <transition name="sideNav">
-        <div class="sort" v-show="isSideNavHomeShow || isSideNavLoginShow">
+        <div
+          class="sort"
+          v-show="isSideNavHomeShow || isSideNavLoginShow"
+          @mouseleave="isSideNavLoginShow = false"
+          @mouseenter="isSideNavLoginShow = true"
+        >
           <div class="all-sort-list2" @click="handleSearchUrl">
             <div
               class="item bo"
