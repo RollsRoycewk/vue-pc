@@ -68,7 +68,10 @@ export default {
   //   this.navList = result.slice(0, -1);
   // },
   computed: {
-    ...mapState(["navList"]),
+    // ...mapState(["navList"]),
+    ...mapState({
+      navList: (state) => state.home.navList,
+    }),
   },
   methods: {
     ...mapActions(["getCategoryList"]),
