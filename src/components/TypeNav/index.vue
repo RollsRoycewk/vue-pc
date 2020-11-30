@@ -1,7 +1,11 @@
 <template>
   <!-- 商品分类导航 -->
   <div class="type-nav">
-    <div class="container">
+    <div
+      class="container"
+      @mouseenter="isSideNavLoginShow = true"
+      @mouseleave="isSideNavLoginShow = false"
+    >
       <h2 class="all">全部商品分类</h2>
       <nav class="nav">
         <a href="###">服装城</a>
@@ -13,7 +17,7 @@
         <a href="###">有趣</a>
         <a href="###">秒杀</a>
       </nav>
-      <div class="sort">
+      <div class="sort" v-show="isSideNavHomeShow || isSideNavLoginShow">
         <div class="all-sort-list2" @click="handleSearchUrl">
           <div
             class="item bo"
@@ -142,15 +146,18 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   name: "TypeNav",
-  // data() {
-  //   return {
-  //     navList: [],
-  //   };
-  // },
+  data() {
+    return {
+      // navList: [],
+      isSideNavHomeShow: this.$route.path === "/",
+      isSideNavLoginShow: false,
+    };
+  },
   // async mounted() {
   //   const result = await getBaseCategoryList();
   //   this.navList = result.slice(0, -1);
   // },
+
   computed: {
     // ...mapState(["navList"]),
     ...mapState({
