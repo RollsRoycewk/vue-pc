@@ -14,14 +14,20 @@
         <a href="###">秒杀</a>
       </nav>
       <div class="sort">
-        <div class="all-sort-list2">
+        <div class="all-sort-list2" @click="handleSearchUrl">
           <div
             class="item bo"
             v-for="oneList in navList"
             :key="oneList.categoryId"
           >
             <h3>
-              <a href="">{{ oneList.categoryName }}</a>
+              <!-- <a href="">{{ oneList.categoryName }}</a> -->
+              <a
+                :data-categoryName="oneList.categoryName"
+                :data-categoryId="oneList.categoryId"
+                data-categoryType="1"
+                >{{ oneList.categoryName }}</a
+              >
             </h3>
             <div class="item-list clearfix">
               <div class="subitem">
@@ -31,14 +37,28 @@
                   :key="twoList.categoryId"
                 >
                   <dt>
-                    <a href="">{{ twoList.categoryName }}</a>
+                    <!-- <a href="">{{ twoList.categoryName }}</a> -->
+                    <!-- <a>{{ twoList.categoryName }}</a> -->
+                    <a
+                      :data-categoryName="twoList.categoryName"
+                      :data-categoryId="twoList.categoryId"
+                      data-categoryType="2"
+                      >{{ twoList.categoryName }}</a
+                    >
                   </dt>
                   <dd>
                     <em
                       v-for="threeList in twoList.categoryChild"
                       :key="threeList.categoryId"
                     >
-                      <a href="">{{ threeList.categoryName }}</a>
+                      <!-- <a href="">{{ threeList.categoryName }}</a> -->
+                      <!-- <a>{{ threeList.categoryName }}</a> -->
+                      <a
+                        :data-categoryName="threeList.categoryName"
+                        :data-categoryId="threeList.categoryId"
+                        data-categoryType="3"
+                        >{{ threeList.categoryName }}</a
+                      >
                     </em>
                   </dd>
                 </dl>
@@ -75,6 +95,20 @@ export default {
   },
   methods: {
     ...mapActions(["getCategoryList"]),
+    // 方式二,处理跳转路径
+    handleSearchUrl(e) {
+      // console.log(e.target);
+      // console.log(e.target.dataset);
+      const { categoryid, categoryname, categorytype } = e.target.dataset;
+      if (!categoryname) return;
+      this.$router.push({
+        name: "search",
+        query: {
+          categoryName: categoryname,
+          [`category${categorytype}Id`]: categoryid,
+        },
+      });
+    },
   },
   mounted() {
     this.getCategoryList();
