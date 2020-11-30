@@ -53,18 +53,28 @@
 
 <script>
 // 获取三级目录函数
-import { getBaseCategoryList } from "@api/home";
+// import { getBaseCategoryList } from "@api/home";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "TypeNav",
-  data() {
-    return {
-      navList: [],
-    };
+  // data() {
+  //   return {
+  //     navList: [],
+  //   };
+  // },
+  // async mounted() {
+  //   const result = await getBaseCategoryList();
+  //   this.navList = result.slice(0, -1);
+  // },
+  computed: {
+    ...mapState(["navList"]),
   },
-  async mounted() {
-    const result = await getBaseCategoryList();
-    this.navList = result.slice(0, -1);
+  methods: {
+    ...mapActions(["getCategoryList"]),
+  },
+  mounted() {
+    this.getCategoryList();
   },
 };
 </script>
