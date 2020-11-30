@@ -175,13 +175,20 @@ export default {
       // console.log(e.target.dataset);
       const { categoryid, categoryname, categorytype } = e.target.dataset;
       if (!categoryname) return;
-      this.$router.push({
+
+      const location = {
         name: "search",
         query: {
           categoryName: categoryname,
           [`category${categorytype}Id`]: categoryid,
         },
-      });
+      };
+      const { searchText } = this.$route.params;
+      if (searchText) {
+        location.params = { searchText };
+      }
+
+      this.$router.push(location);
     },
   },
   mounted() {
