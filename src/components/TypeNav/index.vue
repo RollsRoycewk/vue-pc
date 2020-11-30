@@ -17,24 +17,26 @@
         <a href="###">有趣</a>
         <a href="###">秒杀</a>
       </nav>
-      <div class="sort" v-show="isSideNavHomeShow || isSideNavLoginShow">
-        <div class="all-sort-list2" @click="handleSearchUrl">
-          <div
-            class="item bo"
-            v-for="oneList in navList"
-            :key="oneList.categoryId"
-          >
-            <h3>
-              <!-- <a href="">{{ oneList.categoryName }}</a> -->
+      <!-- 过渡动画 -->
+      <transition name="sideNav">
+        <div class="sort" v-show="isSideNavHomeShow || isSideNavLoginShow">
+          <div class="all-sort-list2" @click="handleSearchUrl">
+            <div
+              class="item bo"
+              v-for="oneList in navList"
+              :key="oneList.categoryId"
+            >
+              <h3>
+                <!-- <a href="">{{ oneList.categoryName }}</a> -->
 
-              <!-- 第一种方式router-link会产生很多组件 -->
-              <!-- <router-link
+                <!-- 第一种方式router-link会产生很多组件 -->
+                <!-- <router-link
                 :to="`/search/?categoryName=${oneList.categoryName}&category1Id=${oneList.categoryId}`"
                 >{{ oneList.categoryName }}</router-link
               > -->
 
-              <!-- 第二种方式,编程式导航,会产生很多函数 -->
-              <!-- <a
+                <!-- 第二种方式,编程式导航,会产生很多函数 -->
+                <!-- <a
                 @click.prevent="
                   $router.push({
                     name: 'search',
@@ -47,32 +49,32 @@
                 >{{ oneList.categoryName }}</a
               > -->
 
-              <!-- 最终方式 -->
-              <a
-                :data-categoryName="oneList.categoryName"
-                :data-categoryId="oneList.categoryId"
-                data-categoryType="1"
-                >{{ oneList.categoryName }}</a
-              >
-            </h3>
-            <div class="item-list clearfix">
-              <div class="subitem">
-                <dl
-                  class="fore"
-                  v-for="twoList in oneList.categoryChild"
-                  :key="twoList.categoryId"
+                <!-- 最终方式 -->
+                <a
+                  :data-categoryName="oneList.categoryName"
+                  :data-categoryId="oneList.categoryId"
+                  data-categoryType="1"
+                  >{{ oneList.categoryName }}</a
                 >
-                  <dt>
-                    <!-- <a href="">{{ twoList.categoryName }}</a> -->
+              </h3>
+              <div class="item-list clearfix">
+                <div class="subitem">
+                  <dl
+                    class="fore"
+                    v-for="twoList in oneList.categoryChild"
+                    :key="twoList.categoryId"
+                  >
+                    <dt>
+                      <!-- <a href="">{{ twoList.categoryName }}</a> -->
 
-                    <!-- 第一种方式router-link会产生很多组件 -->
-                    <!-- <router-link
+                      <!-- 第一种方式router-link会产生很多组件 -->
+                      <!-- <router-link
                       :to="`/search/?categoryName=${twoList.categoryName}&category2Id=${twoList.categoryId}`"
                       >{{ twoList.categoryName }}</router-link
                     > -->
 
-                    <!-- 第二种方式,编程式导航 -->
-                    <!-- <a
+                      <!-- 第二种方式,编程式导航 -->
+                      <!-- <a
                       @click.prevent="
                         $router.push({
                           name: 'search',
@@ -85,29 +87,29 @@
                       >{{ twoList.categoryName }}</a
                     > -->
 
-                    <!-- 最终版 -->
-                    <a
-                      :data-categoryName="twoList.categoryName"
-                      :data-categoryId="twoList.categoryId"
-                      data-categoryType="2"
-                      >{{ twoList.categoryName }}</a
-                    >
-                  </dt>
-                  <dd>
-                    <em
-                      v-for="threeList in twoList.categoryChild"
-                      :key="threeList.categoryId"
-                    >
-                      <!-- <a href="">{{ threeList.categoryName }}</a> -->
+                      <!-- 最终版 -->
+                      <a
+                        :data-categoryName="twoList.categoryName"
+                        :data-categoryId="twoList.categoryId"
+                        data-categoryType="2"
+                        >{{ twoList.categoryName }}</a
+                      >
+                    </dt>
+                    <dd>
+                      <em
+                        v-for="threeList in twoList.categoryChild"
+                        :key="threeList.categoryId"
+                      >
+                        <!-- <a href="">{{ threeList.categoryName }}</a> -->
 
-                      <!-- 第一种方式router-link会产生很多组件 -->
-                      <!-- <router-link
+                        <!-- 第一种方式router-link会产生很多组件 -->
+                        <!-- <router-link
                         :to="`/search/?categoryName=${threeList.categoryName}&category3Id=${threeList.categoryId}`"
                         >{{ threeList.categoryName }}</router-link
                       > -->
 
-                      <!-- 第二种方式,编程式导航 -->
-                      <!-- <a
+                        <!-- 第二种方式,编程式导航 -->
+                        <!-- <a
                         @click.prevent="
                           $router.push({
                             name: 'search',
@@ -120,21 +122,22 @@
                         >{{ threeList.categoryName }}</a
                       > -->
 
-                      <!--最终版  -->
-                      <a
-                        :data-categoryName="threeList.categoryName"
-                        :data-categoryId="threeList.categoryId"
-                        data-categoryType="3"
-                        >{{ threeList.categoryName }}</a
-                      >
-                    </em>
-                  </dd>
-                </dl>
+                        <!--最终版  -->
+                        <a
+                          :data-categoryName="threeList.categoryName"
+                          :data-categoryId="threeList.categoryId"
+                          data-categoryType="3"
+                          >{{ threeList.categoryName }}</a
+                        >
+                      </em>
+                    </dd>
+                  </dl>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -226,7 +229,16 @@ export default {
       height: 461px;
       position: absolute;
       background: #fafafa;
+      // background: pink;
       z-index: 999;
+      // 动画
+      &.sideNav-enter {
+        height: 0px;
+      }
+      &.sideNav-enter-active {
+        transition: height 0.5s;
+        overflow: hidden;
+      }
 
       .all-sort-list2 {
         .item {
