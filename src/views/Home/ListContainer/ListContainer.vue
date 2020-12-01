@@ -3,14 +3,14 @@
     <div class="sortList clearfix">
       <div class="center">
         <!--banner轮播-->
-        <div class="swiper-container" id="mySwiper">
+        <div class="swiper-container">
           <div class="swiper-wrapper">
             <div
               class="swiper-slide"
               v-for="item in slideshowList"
               :key="item.id"
             >
-              <img :src="`${item.imgUrl}`" />
+              <img :src="item.imgUrl" />
             </div>
             <!-- <div class="swiper-slide">
               <img src="./images/banner2.jpg" />
@@ -105,6 +105,11 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+// 引入swiper
+import Swiper, { Navigation, Pagination } from "swiper";
+Swiper.use([Navigation, Pagination]);
+
+import "swiper/swiper-bundle.min.css";
 
 export default {
   name: "ListContainer",
@@ -116,8 +121,30 @@ export default {
       slideshowList: (state) => state.home.slideshowList,
     }),
   },
-  mounted() {
-    this.getSlideshowList();
+  async mounted() {
+    await this.getSlideshowList();
+    this.$nextTick(() => {
+      new Swiper(".swiper-container", {
+        // direction: "vertical", // 垂直切换选项
+        loop: true, // 循环模式选项
+
+        // 如果需要分页器
+        pagination: {
+          el: ".swiper-pagination",
+        },
+
+        // 如果需要前进后退按钮
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+
+        // 如果需要滚动条
+        // scrollbar: {
+        //   el: ".swiper-scrollbar",
+        // },
+      });
+    });
   },
 };
 </script>
