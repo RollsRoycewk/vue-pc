@@ -3,7 +3,7 @@
     <div class="sortList clearfix">
       <div class="center">
         <!--banner轮播-->
-        <div class="swiper-container">
+        <!-- <div class="swiper-container">
           <div class="swiper-wrapper">
             <div
               class="swiper-slide"
@@ -12,23 +12,15 @@
             >
               <img :src="item.imgUrl" />
             </div>
-            <!-- <div class="swiper-slide">
-              <img src="./images/banner2.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="./images/banner3.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="./images/banner4.jpg" />
-            </div> -->
           </div>
-          <!-- 如果需要分页器 -->
+         
           <div class="swiper-pagination"></div>
 
-          <!-- 如果需要导航按钮 -->
+      
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
-        </div>
+        </div> -->
+        <Carousel :slideshowList="slideshowList" />
       </div>
       <div class="right">
         <div class="news">
@@ -105,11 +97,13 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-// 引入swiper
-import Swiper, { Navigation, Pagination } from "swiper";
-Swiper.use([Navigation, Pagination]);
 
-import "swiper/swiper-bundle.min.css";
+import Carousel from "@components/Carousel";
+// 引入swiper
+// import Swiper, { Navigation, Pagination } from "swiper";
+// Swiper.use([Navigation, Pagination]);
+
+// import "swiper/swiper-bundle.min.css";
 
 export default {
   name: "ListContainer",
@@ -124,28 +118,31 @@ export default {
   async mounted() {
     await this.getSlideshowList();
     console.log("swiper");
-    this.$nextTick(() => {
-      new Swiper(".swiper-container", {
-        // direction: "vertical", // 垂直切换选项
-        loop: true, // 循环模式选项
+    // this.$nextTick(() => {
+    //   new Swiper(".swiper-container", {
+    //     // direction: "vertical", // 垂直切换选项
+    //     loop: true, // 循环模式选项
 
-        // 如果需要分页器
-        pagination: {
-          el: ".swiper-pagination",
-        },
+    //     // 如果需要分页器
+    //     pagination: {
+    //       el: ".swiper-pagination",
+    //     },
 
-        // 如果需要前进后退按钮
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
+    //     // 如果需要前进后退按钮
+    //     navigation: {
+    //       nextEl: ".swiper-button-next",
+    //       prevEl: ".swiper-button-prev",
+    //     },
 
-        // 如果需要滚动条
-        // scrollbar: {
-        //   el: ".swiper-scrollbar",
-        // },
-      });
-    });
+    //     // 如果需要滚动条
+    //     // scrollbar: {
+    //     //   el: ".swiper-scrollbar",
+    //     // },
+    //   });
+    // });
+  },
+  components: {
+    Carousel,
   },
 };
 </script>
