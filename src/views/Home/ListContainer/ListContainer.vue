@@ -123,6 +123,7 @@ export default {
   },
   async mounted() {
     await this.getSlideshowList();
+    console.log("swiper");
     this.$nextTick(() => {
       new Swiper(".swiper-container", {
         // direction: "vertical", // 垂直切换选项

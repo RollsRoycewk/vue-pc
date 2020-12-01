@@ -5,6 +5,7 @@ export default {
   getters: {},
   actions: {
     async getCategoryList({ commit }) {
+      console.log("actions");
       const navList = await getBaseCategoryList();
       commit("GET_CATEGORY_LIST", navList);
     },
