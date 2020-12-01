@@ -10,9 +10,13 @@
     <!-- 猜你喜欢 -->
     <Like />
     <!--楼层-->
-    <Floor />
+    <Floor
+      v-for="flooritem in floorsList"
+      :key="flooritem.id"
+      :flooritem="flooritem"
+    />
     <!--楼层-->
-    <Floor />
+    <!-- <Floor /> -->
     <!--商标-->
     <Brand />
   </div>
