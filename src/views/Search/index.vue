@@ -482,26 +482,41 @@ export default {
   },
   methods: {
     ...mapActions(["getProductList"]),
+    updataProductList() {
+      const { searchText: keyword } = this.$route.params;
+      const {
+        categoryName,
+        category2Id,
+        category1Id,
+        category3Id,
+      } = this.$route.query;
+
+      const options = {
+        ...this.options,
+        keyword,
+        categoryName,
+        category2Id,
+        category1Id,
+        category3Id,
+      };
+
+      this.getProductList(options);
+    },
+  },
+  watch: {
+    $route() {
+      this.updataProductList();
+    },
+
+    // $route: {
+    //   handler() {
+    //     this.updataProductList();
+    //   },
+    //   immediate: true,
+    // },
   },
   mounted() {
-    const { searchText: keyword } = this.$route.params;
-    const {
-      categoryName,
-      category2Id,
-      category1Id,
-      category3Id,
-    } = this.$route.query;
-
-    const options = {
-      ...this.options,
-      keyword,
-      categoryName,
-      category2Id,
-      category1Id,
-      category3Id,
-    };
-
-    this.getProductList(options);
+    this.updataProductList();
   },
 
   components: {
