@@ -110,7 +110,7 @@
                   </div>
                   <div class="price">
                     <strong>
-                      <em>¥</em>
+                      <em>¥&nbsp;&nbsp;&nbsp;</em>
                       <i>{{ goods.price }}</i>
                     </strong>
                   </div>
@@ -123,7 +123,12 @@
                     >
                   </div>
                   <div class="commit">
-                    <i class="command">已有<span>2000</span>人评价</i>
+                    <i class="command"
+                      >已有<span>{{
+                        (Math.random() * 10000 + 1000).toString().slice(0, 4)
+                      }}</span
+                      >人评价</i
+                    >
                   </div>
                   <div class="operate">
                     <a

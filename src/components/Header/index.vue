@@ -36,6 +36,7 @@
           class="searchInput"
           placeholder="三星 苹果 锤子"
           v-model="searchText"
+          @keyup="handleSearch"
         />
         <button class="searchBtn" @click="handleSearch">搜索</button>
         <!-- </form> -->
