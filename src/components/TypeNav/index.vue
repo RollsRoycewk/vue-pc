@@ -195,7 +195,12 @@ export default {
         location.params = { searchText };
       }
 
-      this.$router.push(location);
+      // this.$router.replace(location);
+      if (this.$route.name === "search") {
+        this.$router.replace(location);
+      } else {
+        this.$router.push(location);
+      }
     },
   },
   mounted() {
