@@ -45,7 +45,10 @@
             <div class="navbar-inner filter">
               <ul class="sui-nav">
                 <li class="active">
-                  <a href="#">综合</a>
+                  <a href="#"
+                    >综合
+                    <i class="iconfont icon-direction-down"></i>
+                  </a>
                 </li>
                 <li>
                   <a href="#">销量</a>
@@ -56,11 +59,14 @@
                 <li>
                   <a href="#">评价</a>
                 </li>
-                <li>
-                  <a href="#">价格⬆</a>
-                </li>
-                <li>
-                  <a href="#">价格⬇</a>
+                <li class="">
+                  <a href="#"
+                    >价格
+                    <span>
+                      <i class="iconfont icon-arrow-up-filling"></i>
+                      <i class="iconfont icon-arrow-down-filling"></i>
+                    </span>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -360,11 +366,18 @@ export default {
               line-height: 18px;
 
               a {
-                display: block;
+                display: flex;
+                align-items: center;
                 cursor: pointer;
                 padding: 11px 15px;
                 color: #777;
                 text-decoration: none;
+                span {
+                  display: flex;
+                  flex-direction: column;
+                  line-height: 10px;
+                  padding-left: 10px;
+                }
               }
 
               &.active {

@@ -11,7 +11,8 @@ import store from "@store/index";
 import "./mock/mockServer";
 // 引入样式重置
 import "./styles/reset.css";
-
+// 引入图标字体样式
+import "./styles/iconfont.css";
 import "./plugins/element.js";
 
 Vue.config.productionTip = false;
