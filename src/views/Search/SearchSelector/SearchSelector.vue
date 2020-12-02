@@ -22,7 +22,16 @@
       <div class="fl key">{{ attrs.attrName }}</div>
       <div class="fl value">
         <ul class="type-list">
-          <li v-for="(attrValue, index) in attrs.attrValueList" :key="index">
+          <li
+            v-for="(attrValue, index) in attrs.attrValueList"
+            :key="index"
+            @click="
+              $emit(
+                'add-prop',
+                `${attrs.attrId}:${attrValue}:${attrs.attrName}`
+              )
+            "
+          >
             <a>{{ attrValue }}</a>
           </li>
         </ul>
