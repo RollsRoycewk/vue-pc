@@ -11,10 +11,14 @@
             </li>
           </ul>
           <ul class="fl sui-tag">
-            <li class="with-x" v-show="options.keyword">
+            <li class="with-x" v-show="options.keyword" @click="delKeyword">
               {{ options.keyword }}<i>×</i>
             </li>
-            <li class="with-x" v-show="options.categoryName">
+            <li
+              class="with-x"
+              v-show="options.categoryName"
+              @click="delcategoryName"
+            >
               {{ options.categoryName }}<i>×</i>
             </li>
 
@@ -179,6 +183,20 @@ export default {
       // 代理这个数据
       this.options = options;
       this.getProductList(options);
+    },
+    // 删除关键字
+    delKeyword() {
+      // 删除以后需要重新发送请求
+      this.$router.push({
+        name: "search",
+        query: this.$route.query,
+      });
+    },
+    delcategoryName() {
+      this.$router.push({
+        name: "search",
+        params: this.$route.params,
+      });
     },
   },
   watch: {
