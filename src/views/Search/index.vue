@@ -141,7 +141,7 @@
             </ul>
           </div>
           <div class="fr page">
-            <div class="sui-pagination clearfix">
+            <!-- <div class="sui-pagination clearfix">
               <ul>
                 <li class="prev disabled">
                   <a href="#">«上一页</a>
@@ -167,6 +167,21 @@
                 </li>
               </ul>
               <div><span>共10页&nbsp;</span></div>
+            </div> -->
+
+            <!-- elmentUI 分页器 -->
+            <div class="block">
+              <!-- <span class="demonstration">完整功能</span> -->
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400"
+              >
+              </el-pagination>
             </div>
           </div>
         </div>
