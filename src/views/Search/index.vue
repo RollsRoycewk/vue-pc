@@ -297,6 +297,9 @@ export default {
           this.productShow = false;
           // 第一次点一定是升序,默认行为
           orderType = "asc";
+        } else {
+          // 上一次的值是多少就多少,否则点击完价格排序以后他的排序方式会给默认排序.这是注意点
+          orderType = this.compuShow ? "desc" : "asc";
         }
       }
       this.options.order = `${order}:${orderType}`;
