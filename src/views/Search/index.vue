@@ -44,23 +44,37 @@
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active">
-                  <a href="#"
+                <!-- 综合排序 -->
+                <li
+                  :class="{ active: options.order.indexOf('1') > -1 }"
+                  @click="setOrder('1')"
+                >
+                  <a
                     >综合
-                    <i class="iconfont icon-direction-down"></i>
+                    <i
+                      :class="{
+                        iconfont: true,
+                        'icon-direction-down': compuShow,
+                        'icon-direction-up': !compuShow,
+                      }"
+                    ></i>
                   </a>
                 </li>
                 <li>
-                  <a href="#">销量</a>
+                  <a>销量</a>
                 </li>
                 <li>
-                  <a href="#">新品</a>
+                  <a>新品</a>
                 </li>
                 <li>
-                  <a href="#">评价</a>
+                  <a>评价</a>
                 </li>
-                <li class="">
-                  <a href="#"
+                <!-- 价格排序 -->
+                <li
+                  @click="setOrder('2')"
+                  :class="{ active: options.order.indexOf('2') > -1 }"
+                >
+                  <a
                     >价格
                     <span>
                       <i class="iconfont icon-arrow-up-filling"></i>
@@ -169,6 +183,8 @@ export default {
         props: [], // 商品属性
         trademark: "", // 品牌
       },
+      // 综合排序图标显示
+      compuShow: true,
     };
   },
   computed: {
@@ -238,6 +254,21 @@ export default {
     // 删除品牌属性
     delProp(index) {
       this.options.props.splice(index, 1);
+      this.updataProductList();
+    },
+    // 设置排序方式  1:desc
+    setOrder(order) {
+      // asc升序  desc降序
+      let [orderNum, orderType] = this.options.order.split(":");
+      console.log(orderNum);
+
+      if (orderNum === order) {
+        // 如果不相等,说明是第一次点击==>不改变图标
+        //  如果相等,说明是第二次,改变图标
+        this.compuShow = !this.compuShow;
+        orderType = orderType === "desc" ? "asc" : "asc";
+      }
+      this.options.order = `${order}:${orderType}`;
       this.updataProductList();
     },
   },
