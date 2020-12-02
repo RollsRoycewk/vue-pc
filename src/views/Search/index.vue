@@ -21,15 +21,14 @@
             >
               {{ options.categoryName }}<i>×</i>
             </li>
-
-            <!-- <li class="with-x">iphone<i>×</i></li>
-            <li class="with-x">华为<i>×</i></li>
-            <li class="with-x">OPPO<i>×</i></li> -->
+            <li class="with-x" v-show="options.trademark" @click="delTrademark">
+              品牌:{{ options.trademark.split(":")[1] }}<i>×</i>
+            </li>
           </ul>
         </div>
 
         <!--selector-->
-        <SearchSelector />
+        <SearchSelector :addTrademark="addTrademark" />
 
         <!--details-->
         <div class="details clearfix">
@@ -205,6 +204,16 @@ export default {
         name: "search",
         params: this.$route.params,
       });
+    },
+    // 添加品牌
+    addTrademark(trademark) {
+      this.options.trademark = trademark;
+      this.updataProductList();
+    },
+    // 删除品牌
+    delTrademark() {
+      this.options.trademark = "";
+      this.updataProductList();
     },
   },
   watch: {
