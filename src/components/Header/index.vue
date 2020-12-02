@@ -93,6 +93,12 @@ export default {
     //   });
     // },
   },
+  // 定义清空搜索框的方法,在search组件使用
+  mounted() {
+    this.$bus.$on("clearSearchText", () => {
+      this.searchText = "";
+    });
+  },
 };
 </script>
 

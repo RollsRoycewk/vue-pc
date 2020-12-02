@@ -186,6 +186,9 @@ export default {
     },
     // 删除关键字
     delKeyword() {
+      this.options.keyword = "";
+      // 清空搜索框
+      this.$bus.$emit("clearSearchText");
       // 删除以后需要重新发送请求
       this.$router.push({
         name: "search",
@@ -193,6 +196,11 @@ export default {
       });
     },
     delcategoryName() {
+      this.options.categoryName = "";
+      this.options.category1Id = "";
+      this.options.category2Id = "";
+      this.options.category3Id = "";
+
       this.$router.push({
         name: "search",
         params: this.$route.params,
