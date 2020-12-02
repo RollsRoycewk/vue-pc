@@ -77,8 +77,22 @@
                   <a
                     >价格
                     <span>
-                      <i class="iconfont icon-arrow-up-filling"></i>
-                      <i class="iconfont icon-arrow-down-filling"></i>
+                      <i
+                        :class="{
+                          iconfont: true,
+                          'icon-arrow-up-filling': true,
+                          deactive:
+                            options.order.indexOf('2') > -1 && productShow,
+                        }"
+                      ></i>
+                      <i
+                        :class="{
+                          iconfont: true,
+                          'icon-arrow-down-filling': true,
+                          deactive:
+                            options.order.indexOf('2') > -1 && !productShow,
+                        }"
+                      ></i>
                     </span>
                   </a>
                 </li>
@@ -185,6 +199,8 @@ export default {
       },
       // 综合排序图标显示
       compuShow: true,
+      // 价格排序显示
+      productShow: false,
     };
   },
   computed: {
@@ -256,7 +272,7 @@ export default {
       this.options.props.splice(index, 1);
       this.updataProductList();
     },
-    // 设置排序方式  1:desc
+    // 设置排序方式  1:desc  默认降序
     setOrder(order) {
       // asc升序  desc降序
       let [orderNum, orderType] = this.options.order.split(":");
@@ -265,8 +281,23 @@ export default {
       if (orderNum === order) {
         // 如果不相等,说明是第一次点击==>不改变图标
         //  如果相等,说明是第二次,改变图标
-        this.compuShow = !this.compuShow;
-        orderType = orderType === "desc" ? "asc" : "asc";
+
+        /* 这个if就是第二次点击,值进行取反 */
+        if (order === "1") {
+          this.compuShow = !this.compuShow;
+        } else {
+          this.productShow = !this.productShow;
+        }
+        // 进来这个就是和上一次相等,所以进行取反
+        orderType = orderType === "desc" ? "asc" : "desc";
+      } else {
+        // else永远是第一次点击
+        // 如果点击的是价格,要初始化为升序
+        if (order === "2") {
+          this.productShow = false;
+          // 第一次点一定是升序,默认行为
+          orderType = "asc";
+        }
       }
       this.options.order = `${order}:${orderType}`;
       this.updataProductList();
@@ -408,6 +439,11 @@ export default {
                   flex-direction: column;
                   line-height: 10px;
                   padding-left: 10px;
+                  i {
+                    &.deactive {
+                      color: rgba(250, 250, 250, 0.5);
+                    }
+                  }
                 }
               }
 
