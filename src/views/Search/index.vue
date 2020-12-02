@@ -173,13 +173,15 @@
             <div class="block">
               <!-- <span class="demonstration">完整功能</span> -->
               <el-pagination
+                background
+                :pager-count="5"
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="400"
+                :current-page="options.pageNo"
+                :page-sizes="[5, 10, 15, 20]"
+                :page-size="options.pageSize"
+                layout=" prev, pager, next, jumper,total, sizes"
+                :total="total"
               >
               </el-pagination>
             </div>
@@ -206,9 +208,9 @@ export default {
         category3Id: "", // 三级分类id
         categoryName: "", // 分类名称
         keyword: "", // 搜索内容（搜索关键字）
-        order: "", // 排序方式：1：综合排序  2：价格排序   asc 升序  desc 降序
+        order: "1:desc", // 排序方式：1：综合排序  2：价格排序   asc 升序  desc 降序
         pageNo: 1, // 分页的页码（第几页）
-        pageSize: 5, // 分页的每页商品数量
+        pageSize: 10, // 分页的每页商品数量
         props: [], // 商品属性
         trademark: "", // 品牌
       },
@@ -219,7 +221,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["goodsList"]),
+    ...mapGetters(["goodsList", "total"]),
   },
   methods: {
     ...mapActions(["getProductList"]),
@@ -318,6 +320,19 @@ export default {
         }
       }
       this.options.order = `${order}:${orderType}`;
+      this.updataProductList();
+    },
+    // 分页器
+    // 每页显示的数量
+    handleSizeChange(pageSize) {
+      // console.log("pageSize", pageSize);
+      this.options.pageSize = pageSize;
+      this.updataProductList();
+    },
+    // 当前点击的页数
+    handleCurrentChange(pageNo) {
+      this.options.pageNo = pageNo;
+      console.log("pageNo", pageNo);
       this.updataProductList();
     },
   },
