@@ -463,6 +463,20 @@ import TypeNav from "@components/TypeNav";
 
 export default {
   name: "Search",
+  data() {
+    return {
+      category1Id: "", // 一级分类id
+      category2Id: "", // 二级分类id
+      category3Id: "", // 三级分类id
+      categoryName: "", // 分类名称
+      keyword: "", // 搜索内容（搜索关键字）
+      order: "", // 排序方式：1：综合排序  2：价格排序   asc 升序  desc 降序
+      pageNo: 1, // 分页的页码（第几页）
+      pageSize: 5, // 分页的每页商品数量
+      props: [], // 商品属性
+      trademark: "", // 品牌
+    };
+  },
   computed: {
     ...mapGetters(["goodsList"]),
   },
@@ -470,7 +484,24 @@ export default {
     ...mapActions(["getProductList"]),
   },
   mounted() {
-    this.getProductList();
+    const { searchText: keyword } = this.$route.params;
+    const {
+      categoryName,
+      category2Id,
+      category1Id,
+      category3Id,
+    } = this.$route.query;
+
+    const options = {
+      ...this.options,
+      keyword,
+      categoryName,
+      category2Id,
+      category1Id,
+      category3Id,
+    };
+
+    this.getProductList(options);
   },
 
   components: {
