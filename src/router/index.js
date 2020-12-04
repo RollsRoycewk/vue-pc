@@ -5,6 +5,8 @@ import Home from "../views/Home";
 import Login from "../views/Login";
 import Register from "../views/Register";
 import Search from "../views/Search";
+// 商品详情
+import Detail from "@views/Detail";
 
 Vue.use(VueRouter);
 
@@ -64,6 +66,12 @@ export default new VueRouter({
       name: "search",
       path: "/search/:searchText?",
       component: Search,
+    },
+    // 商品详情页
+    {
+      name: "detail",
+      path: "/detail/:detailId",
+      component: Detail,
     },
   ],
 });
