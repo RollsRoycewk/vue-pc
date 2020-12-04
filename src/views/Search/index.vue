@@ -45,10 +45,7 @@
             <div class="navbar-inner filter">
               <ul class="sui-nav">
                 <!-- 综合排序 -->
-                <li
-                  :class="{ active: options.order.indexOf('1') > -1 }"
-                  @click="setOrder('1')"
-                >
+                <li :class="{ active: isOrderId('1') }" @click="setOrder('1')">
                   <a
                     >综合
                     <i
@@ -70,10 +67,7 @@
                   <a>评价</a>
                 </li>
                 <!-- 价格排序 -->
-                <li
-                  @click="setOrder('2')"
-                  :class="{ active: options.order.indexOf('2') > -1 }"
-                >
+                <li @click="setOrder('2')" :class="{ active: isOrderId('2') }">
                   <a
                     >价格
                     <span>
@@ -81,16 +75,14 @@
                         :class="{
                           iconfont: true,
                           'icon-arrow-up-filling': true,
-                          deactive:
-                            options.order.indexOf('2') > -1 && productShow,
+                          deactive: isOrderId('2') && productShow,
                         }"
                       ></i>
                       <i
                         :class="{
                           iconfont: true,
                           'icon-arrow-down-filling': true,
-                          deactive:
-                            options.order.indexOf('2') > -1 && !productShow,
+                          deactive: isOrderId('2') && !productShow,
                         }"
                       ></i>
                     </span>
@@ -276,6 +268,8 @@ export default {
     },
     // 添加品牌
     addTrademark(trademark) {
+      // bug优化
+      if (this.options.trademark) return;
       this.options.trademark = trademark;
       this.updataProductList();
     },
@@ -286,6 +280,8 @@ export default {
     },
     // 添加品牌属性
     addProp(prop) {
+      // bug解决
+      if (this.options.props.indexOf(prop) > -1) return;
       this.options.props.push(prop);
       this.updataProductList();
     },
@@ -337,8 +333,11 @@ export default {
     // 当前点击的页数
     handleCurrentChange(pageNo) {
       this.options.pageNo = pageNo;
-      console.log("pageNo", pageNo);
       this.updataProductList();
+    },
+    // 性能优化
+    isOrderId(num) {
+      return this.options.order.indexOf(num) > -1;
     },
   },
   watch: {
