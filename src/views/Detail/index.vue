@@ -16,9 +16,15 @@
         <!-- 左侧放大镜区域 -->
         <div class="previewWrap">
           <!--放大镜效果-->
-          <Zoom />
+          <Zoom
+            :imgUrl="skuInfo.skuImageList && skuInfo.skuImageList[currentImgIndex].imgUrl"
+            :imgBigUrl="skuInfo.skuImageList && skuInfo.skuImageList[currentImgIndex].imgUrl"
+          />
           <!-- 小图列表 -->
-          <ImageList :skuImageList="skuInfo.skuImageList" />
+          <ImageList
+            :skuImageList="skuInfo.skuImageList"
+            :updateCurrentImgIndex="updateCurrentImgIndex"
+          />
         </div>
         <!-- 右侧选择区域布局 -->
         <div class="InfoWrap">
@@ -360,8 +366,17 @@ import TypeNav from "@components/TypeNav";
 
 export default {
   name: "Detail",
+  data() {
+    return {
+      currentImgIndex: 0, // 当前选中图片的下标
+    };
+  },
+  // 定义一个方法,点击小图的时候修改中图和大图的图片
   methods: {
     ...mapActions(["reqProductDetail"]),
+    updateCurrentImgIndex(index) {
+      this.currentImgIndex = index;
+    },
   },
   computed: {
     ...mapGetters(["categoryView", "spuSaleAttrList", "skuInfo"]),
