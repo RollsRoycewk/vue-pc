@@ -17,8 +17,14 @@
         <div class="previewWrap">
           <!--放大镜效果-->
           <Zoom
-            :imgUrl="skuInfo.skuImageList && skuInfo.skuImageList[currentImgIndex].imgUrl"
-            :imgBigUrl="skuInfo.skuImageList && skuInfo.skuImageList[currentImgIndex].imgUrl"
+            :imgUrl="
+              skuInfo.skuImageList &&
+              skuInfo.skuImageList[currentImgIndex].imgUrl
+            "
+            :imgBigUrl="
+              skuInfo.skuImageList &&
+              skuInfo.skuImageList[currentImgIndex].imgUrl
+            "
           />
           <!-- 小图列表 -->
           <ImageList
@@ -114,10 +120,17 @@
             </div>
             <div class="cartWrap">
               <div class="controls">
-                <input autocomplete="off" class="itxt" />
+                <!-- <input autocomplete="off" class="itxt" />
                 <a href="javascript:" class="plus">+</a>
-                <a href="javascript:" class="mins">-</a>
+                <a href="javascript:" class="mins">-</a> -->
+                <el-input-number
+                  v-model="shopNum"
+                  controls-position="right"
+                  :min="1"
+                  :max="100"
+                ></el-input-number>
               </div>
+
               <div class="add">
                 <a href="javascript:">加入购物车</a>
               </div>
@@ -368,6 +381,8 @@ export default {
   name: "Detail",
   data() {
     return {
+      // 购物车商品数量
+      shopNum: 1,
       currentImgIndex: 0, // 当前选中图片的下标
     };
   },
@@ -597,6 +612,7 @@ export default {
 
             .add {
               float: left;
+              margin-left: 150px;
 
               a {
                 background-color: #e1251b;
