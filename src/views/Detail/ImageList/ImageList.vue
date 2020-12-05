@@ -1,8 +1,8 @@
 <template>
-  <div class="swiper-container">
+  <div class="swiper-container" ref="swiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <img src="../images/s1.png" />
+      <div class="swiper-slide" v-for="item in skuImageList" :key="item.id">
+        <img :src="item.imgUrl" />
       </div>
     </div>
     <div class="swiper-button-next"></div>
@@ -11,9 +11,45 @@
 </template>
 
 <script>
-// import Swiper from 'swiper'
+import Swiper, { Navigation } from "swiper";
+
+// import "swiper/swiper-bundle.min.css";
+
+Swiper.use([Navigation]);
+
 export default {
   name: "ImageList",
+  props: {
+    skuImageList: {
+      type: Array,
+    },
+  },
+  watch: {
+    skuImageList() {
+      this.$nextTick(() => {
+        new Swiper(this.$refs.swiper, {
+          // 每页显示的数量
+          slidesPerView: 5,
+          // 图片间隔
+          spaceBetween: 30,
+          // 每次切换的数量
+          slidesPerGroup: 5,
+          // 如果需要前进后退按钮
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+        });
+      });
+    },
+  },
+  // mounted() {
+  //   new Swiper(".swiper-container", {
+  //     // autoplay: true, //可选选项，自动滑动
+  //     slidesPerView: 5,
+  //     slidesPerGroup: 5,
+  //   });
+  // },
 };
 </script>
 
@@ -27,6 +63,7 @@ export default {
   .swiper-slide {
     width: 56px;
     height: 56px;
+    // margin: 0 10px;
 
     img {
       width: 100%;

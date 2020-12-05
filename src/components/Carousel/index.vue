@@ -18,7 +18,7 @@
 // 引入swiper
 import Swiper, { Navigation, Pagination, Autoplay } from "swiper";
 
-import "swiper/swiper-bundle.min.css";
+// import "swiper/swiper-bundle.min.css";
 
 Swiper.use([Navigation, Pagination, Autoplay]);
 
