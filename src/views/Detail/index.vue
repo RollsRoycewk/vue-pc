@@ -132,7 +132,7 @@
               </div>
 
               <div class="add">
-                <a href="javascript:">加入购物车</a>
+                <a href="javascript:" @click="addShopCart">加入购物车</a>
               </div>
             </div>
           </div>
@@ -388,9 +388,24 @@ export default {
   },
   // 定义一个方法,点击小图的时候修改中图和大图的图片
   methods: {
-    ...mapActions(["reqProductDetail"]),
+    ...mapActions(["reqProductDetail", "upShopCart"]),
+    // 更新图片下标的方法
     updateCurrentImgIndex(index) {
       this.currentImgIndex = index;
+    },
+    // 添加购物车功能
+    async addShopCart() {
+      try {
+        // 加入购物车成功,要跳转到购物车成功页面
+        await this.upShopCart({
+          skuID: this.skuInfo.id,
+          skuNum: this.shopNum,
+        });
+        // 上面是异步请求,所以要async
+        this.$router.push(`/addCartSuccess?skuNum=${this.skuNum}`);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
   computed: {

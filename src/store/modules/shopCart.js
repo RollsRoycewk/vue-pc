@@ -1,6 +1,6 @@
 import {
   reqGetCartList,
-  //   reqUpShopCart,
+  reqUpShopCart,
   //   delShopCartCommodity,
   reqShopCartCheck,
 } from "@api/shopCart";
@@ -22,10 +22,16 @@ export default {
       await reqShopCartCheck(skuId, isChecked);
       console.log(commit);
     },
+    // 加入购物车功能
+    async upShopCart({ commit }, { skuID, skuNum }) {
+      await reqUpShopCart(skuID, skuNum);
+      console.log(commit);
+    },
   },
   mutations: {
     GET_CART_LIST(state, allShopCart) {
       state.allShopCartList = allShopCart;
+      // 更新数据成功就要进行跳转
     },
   },
 };
