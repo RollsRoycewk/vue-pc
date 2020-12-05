@@ -5,6 +5,8 @@ import Home from "../views/Home";
 import Login from "../views/Login";
 import Register from "../views/Register";
 import Search from "../views/Search";
+import ShopCart from "@views/ShopCart";
+import AddCartSuccess from "@views/AddCartSuccess";
 // 商品详情
 import Detail from "@views/Detail";
 
@@ -72,6 +74,18 @@ export default new VueRouter({
       name: "detail",
       path: "/detail/:detailId",
       component: Detail,
+    },
+    // 添加购物车
+    {
+      name: "shopCart",
+      path: "/shopCart",
+      component: ShopCart,
+    },
+    // 购物车完成
+    {
+      name: "addCartSuccess",
+      path: "/addCartSuccess",
+      component: AddCartSuccess,
     },
   ],
   // 每次切换路由页面滚动条位置
