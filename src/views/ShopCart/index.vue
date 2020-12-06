@@ -36,7 +36,12 @@
             <span class="price">{{ allShopCart.skuPrice }}</span>
           </li>
           <li class="cart-list-con5">
-            <a href="javascript:void(0)" class="mins">-</a>
+            <a
+              href="javascript:void(0)"
+              class="mins"
+              @click="cartUpData(allShopCart.skuId, -1)"
+              >-</a
+            >
             <input
               autocomplete="off"
               type="text"
@@ -44,7 +49,12 @@
               minnum="1"
               class="itxt"
             />
-            <a href="javascript:void(0)" class="plus">+</a>
+            <a
+              href="javascript:void(0)"
+              class="plus"
+              @click="cartUpData(allShopCart.skuId, 1)"
+              >+</a
+            >
           </li>
           <li class="cart-list-con6">
             <span class="sum">{{
@@ -92,7 +102,13 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "ShopCart",
   methods: {
-    ...mapActions(["getCartList"]),
+    ...mapActions(["getCartList", "upShopCart"]),
+    async cartUpData(skuID, skuNum) {
+      await this.upShopCart({ skuID, skuNum });
+
+      // 改完数据以后一定要重新请求数据,这是第一种方式,用服务器数据来修改本地数据
+      this.getCartList();
+    },
   },
   computed: {
     ...mapState({

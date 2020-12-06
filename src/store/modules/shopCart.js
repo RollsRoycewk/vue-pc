@@ -24,6 +24,7 @@ export default {
     },
     // 加入购物车功能
     async upShopCart({ commit }, { skuID, skuNum }) {
+      console.log(skuID, skuNum);
       await reqUpShopCart(skuID, skuNum);
       console.log(commit);
     },
