@@ -1,9 +1,14 @@
 import axios from "axios";
+
+// 提示框
+import { Message } from "element-ui";
+
+// uuid
+import getUserTempId from "@utils/getUserTempId";
+
 // 进度条
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
-// 提示框
-import { Message } from "element-ui";
 
 const instence = axios.create({
   //   baseURL: "http://182.92.128.115/api",
@@ -13,6 +18,9 @@ const instence = axios.create({
 
 instence.interceptors.request.use((config) => {
   NProgress.start();
+
+  const userTempId = getUserTempId();
+  config.headers.userTempId = userTempId;
   return config;
 });
 

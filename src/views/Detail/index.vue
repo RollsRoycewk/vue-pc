@@ -402,7 +402,7 @@ export default {
           skuNum: this.shopNum,
         });
         // 上面是异步请求,所以要async
-        this.$router.push(`/addCartSuccess?skuNum=${this.skuNum}`);
+        this.$router.push(`/addCartSuccess?skuNum=${this.shopNum}`);
       } catch (error) {
         console.log(error);
       }
