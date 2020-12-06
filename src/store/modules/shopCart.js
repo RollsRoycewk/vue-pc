@@ -30,7 +30,7 @@ export default {
     // 删除商品
     async delShopCartCommodity({ commit }, skuId) {
       await reqDelShopCartCommodity(skuId);
-      console.log(commit);
+      commit("DEL_SHOPCART_COMMODITY", skuId);
     },
   },
   mutations: {
@@ -46,6 +46,12 @@ export default {
         }
         return item;
       });
+    },
+    // 删除商品
+    DEL_SHOPCART_COMMODITY(state, skuId) {
+      state.allShopCartList = state.allShopCartList.filter(
+        (item) => item.skuId !== skuId
+      );
     },
   },
 };

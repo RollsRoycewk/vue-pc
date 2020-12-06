@@ -115,7 +115,7 @@ export default {
     // 删除购物车数据
     async delCommodity(skuId) {
       await this.delShopCartCommodity(skuId);
-      this.getCartList();
+      // this.getCartList();
     },
   },
   computed: {
