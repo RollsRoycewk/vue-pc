@@ -1,7 +1,7 @@
 import {
   reqGetCartList,
   reqUpShopCart,
-  //   delShopCartCommodity,
+  reqDelShopCartCommodity,
   reqShopCartCheck,
 } from "@api/shopCart";
 
@@ -26,6 +26,11 @@ export default {
     async upShopCart({ commit }, { skuID, skuNum }) {
       await reqUpShopCart(skuID, skuNum);
       commit("UP_SHOP_CART", { skuID, skuNum });
+    },
+    // 删除商品
+    async delShopCartCommodity({ commit }, skuId) {
+      await reqDelShopCartCommodity(skuId);
+      console.log(commit);
     },
   },
   mutations: {

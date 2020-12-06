@@ -62,7 +62,9 @@
             }}</span>
           </li>
           <li class="cart-list-con7">
-            <a href="#none" class="sindelet">删除</a>
+            <a class="sindelet" @click="delCommodity(allShopCart.skuId)"
+              >删除</a
+            >
             <br />
             <a href="#none">移到收藏</a>
           </li>
@@ -102,12 +104,18 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "ShopCart",
   methods: {
-    ...mapActions(["getCartList", "upShopCart"]),
+    ...mapActions(["getCartList", "upShopCart", "delShopCartCommodity"]),
+    // 更新购物车数据
     async cartUpData(skuID, skuNum) {
       await this.upShopCart({ skuID, skuNum });
 
       // 改完数据以后一定要重新请求数据,这是第一种方式,用服务器数据来修改本地数据
       // this.getCartList();
+    },
+    // 删除购物车数据
+    async delCommodity(skuId) {
+      await this.delShopCartCommodity(skuId);
+      this.getCartList();
     },
   },
   computed: {

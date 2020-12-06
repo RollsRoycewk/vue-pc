@@ -25,7 +25,7 @@ export const reqShopCartCheck = (skuID, isChecked) => {
 };
 
 // 删除购物车商品
-export const delShopCartCommodity = (skuId) => {
+export const reqDelShopCartCommodity = (skuId) => {
   return request({
     method: "DELETE",
     url: `/cart/deleteCart/${skuId}`,
