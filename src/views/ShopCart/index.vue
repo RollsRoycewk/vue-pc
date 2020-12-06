@@ -57,80 +57,6 @@
             <a href="#none">移到收藏</a>
           </li>
         </ul>
-
-        <!-- <ul class="cart-list">
-          <li class="cart-list-con1">
-            <input type="checkbox" name="chk_list" id="" value="" />
-          </li>
-          <li class="cart-list-con2">
-            <img src="./images/goods2.png" />
-            <div class="item-msg">
-              华为（MIJIA） 华为metaPRO 30 浴霸4摄像 超清晰
-            </div>
-          </li>
-          <li class="cart-list-con3">
-            <div class="item-txt">黑色版本</div>
-          </li>
-          <li class="cart-list-con4">
-            <span class="price">5622.00</span>
-          </li>
-          <li class="cart-list-con5">
-            <a href="javascript:void(0)" class="mins">-</a>
-            <input
-              autocomplete="off"
-              type="text"
-              value="1"
-              minnum="1"
-              class="itxt"
-            />
-            <a href="javascript:void(0)" class="plus">+</a>
-          </li>
-          <li class="cart-list-con6">
-            <span class="sum">5622</span>
-          </li>
-          <li class="cart-list-con7">
-            <a href="#none" class="sindelet">删除</a>
-            <br />
-            <a href="#none">移到收藏</a>
-          </li>
-        </ul>
-
-        <ul class="cart-list">
-          <li class="cart-list-con1">
-            <input type="checkbox" name="chk_list" id="" value="" />
-          </li>
-          <li class="cart-list-con2">
-            <img src="./images/goods3.png" />
-            <div class="item-msg">
-              iphone 11 max PRO 苹果四摄 超清晰 超费电 超及好用
-            </div>
-          </li>
-          <li class="cart-list-con3">
-            <div class="item-txt">墨绿色</div>
-          </li>
-          <li class="cart-list-con4">
-            <span class="price">11399.00</span>
-          </li>
-          <li class="cart-list-con5">
-            <a href="javascript:void(0)" class="mins">-</a>
-            <input
-              autocomplete="off"
-              type="text"
-              value="1"
-              minnum="1"
-              class="itxt"
-            />
-            <a href="javascript:void(0)" class="plus">+</a>
-          </li>
-          <li class="cart-list-con6">
-            <span class="sum">11399</span>
-          </li>
-          <li class="cart-list-con7">
-            <a href="#none" class="sindelet">删除</a>
-            <br />
-            <a href="#none">移到收藏</a>
-          </li>
-        </ul> -->
       </div>
     </div>
     <div class="cart-tool">
@@ -144,10 +70,13 @@
         <a href="#none">清除下柜商品</a>
       </div>
       <div class="money-box">
-        <div class="chosed">已选择 <span>0</span>件商品</div>
+        <div class="chosed">
+          已选择 <span>{{ total }}</span
+          >件商品
+        </div>
         <div class="sumprice">
           <em>总价（不含运费） ：</em>
-          <i class="summoney">0</i>
+          <i class="summoney">{{ allPrice }}</i>
         </div>
         <div class="sumbtn">
           <a class="sum-btn" href="###" target="_blank">结算</a>
@@ -169,6 +98,18 @@ export default {
     ...mapState({
       allShopCartList: (state) => state.shopcart.allShopCartList,
     }),
+    // 已选择商品数量
+    total() {
+      return this.allShopCartList
+        .filter((item) => item.isChecked === 1)
+        .reduce((p, c) => p + c.skuNum, 0);
+    },
+    // 已选择商品总价
+    allPrice() {
+      return this.allShopCartList
+        .filter((item) => item.isChecked === 1)
+        .reduce((p, c) => p + c.skuPrice * c.skuNum, 0);
+    },
   },
   mounted() {
     this.getCartList();
@@ -240,7 +181,7 @@ export default {
         }
 
         .cart-list-con2 {
-          width: 25%;
+          width: 45%;
 
           img {
             width: 82px;
