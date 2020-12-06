@@ -107,7 +107,7 @@ export default {
       await this.upShopCart({ skuID, skuNum });
 
       // 改完数据以后一定要重新请求数据,这是第一种方式,用服务器数据来修改本地数据
-      this.getCartList();
+      // this.getCartList();
     },
   },
   computed: {

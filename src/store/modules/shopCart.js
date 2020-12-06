@@ -22,17 +22,25 @@ export default {
       await reqShopCartCheck(skuId, isChecked);
       console.log(commit);
     },
-    // 加入购物车功能
+    // 更新商品状态
     async upShopCart({ commit }, { skuID, skuNum }) {
-      console.log(skuID, skuNum);
       await reqUpShopCart(skuID, skuNum);
-      console.log(commit);
+      commit("UP_SHOP_CART", { skuID, skuNum });
     },
   },
   mutations: {
     GET_CART_LIST(state, allShopCart) {
       state.allShopCartList = allShopCart;
       // 更新数据成功就要进行跳转
+    },
+    // 更新购物车数据
+    UP_SHOP_CART(state, { skuID, skuNum }) {
+      state.allShopCartList = state.allShopCartList.map((item) => {
+        if (item.skuId === skuID) {
+          item.skuNum += skuNum;
+        }
+        return item;
+      });
     },
   },
 };
