@@ -74,11 +74,11 @@
     </div>
     <div class="cart-tool">
       <div class="select-all">
-        <input class="chooseAll" type="checkbox" />
+        <input class="chooseAll" type="checkbox" v-model="isAllCheck" />
         <span>全选</span>
       </div>
       <div class="option">
-        <a href="#none">删除选中的商品</a>
+        <a href="#none" @click="delAllDone">删除选中的商品</a>
         <a href="#none">移到我的关注</a>
         <a href="#none">清除下柜商品</a>
       </div>
@@ -130,11 +130,37 @@ export default {
       await this.shopCartCheck({ skuId, isChecked });
       this.getCartList();
     },
+    // 删除所有已经选中的商品
+    delAllDone() {
+      this.allShopCartList.forEach(async (item) => {
+        if (item.isChecked === 1) {
+          await this.delShopCartCommodity(item.skuId);
+          this.getCartList();
+        }
+      });
+    },
   },
   computed: {
     ...mapState({
       allShopCartList: (state) => state.shopcart.allShopCartList,
     }),
+    // 全选按钮
+    isAllCheck: {
+      get() {
+        return (
+          this.allShopCartList.every((item) => item.isChecked === 1) &&
+          this.allShopCartList.length !== 0
+        );
+      },
+      set(val) {
+        let isChecked = val ? 1 : 0;
+        this.allShopCartList.forEach(async (item) => {
+          let skuId = item.skuId;
+          await this.shopCartCheck({ skuId, isChecked });
+          this.getCartList();
+        });
+      },
+    },
     // 已选择商品数量
     total() {
       return this.allShopCartList
