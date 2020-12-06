@@ -21,6 +21,7 @@
               type="checkbox"
               name="chk_list"
               :checked="allShopCart.isChecked"
+              @click="handleCheck(allShopCart)"
             />
           </li>
           <li class="cart-list-con2">
@@ -104,7 +105,12 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "ShopCart",
   methods: {
-    ...mapActions(["getCartList", "upShopCart", "delShopCartCommodity"]),
+    ...mapActions([
+      "getCartList",
+      "upShopCart",
+      "delShopCartCommodity",
+      "shopCartCheck",
+    ]),
     // 更新购物车数据
     async cartUpData(skuID, skuNum) {
       await this.upShopCart({ skuID, skuNum });
@@ -116,6 +122,13 @@ export default {
     async delCommodity(skuId) {
       await this.delShopCartCommodity(skuId);
       // this.getCartList();
+    },
+    // 更改状态
+    async handleCheck(allShopCart) {
+      const skuId = allShopCart.skuId;
+      const isChecked = allShopCart.isChecked === 1 ? 0 : 1;
+      await this.shopCartCheck({ skuId, isChecked });
+      this.getCartList();
     },
   },
   computed: {
