@@ -1,23 +1,74 @@
 <template>
-  <div class="spec-preview">
+  <div class="spec-preview" @mousemove="handleMove">
     <img :src="imgUrl" />
     <div class="event"></div>
     <div class="big">
-      <img :src="imgBigUrl" />
+      <img :src="imgBigUrl" :style="{ left: bigImgX, top: bigImgY }" />
     </div>
-    <div class="mask"></div>
+    <div class="mask" :style="{ left: maskX, top: maskY }"></div>
   </div>
 </template>
 
 <script>
 export default {
   name: "Zoom",
+  data() {
+    return {
+      maskX: "0px",
+      maskY: "0px",
+      bigImgX: "0px",
+      bigImgY: "0px",
+    };
+  },
   props: {
     imgUrl: {
       type: String,
     },
     imgBigUrl: {
       type: String,
+    },
+  },
+  methods: {
+    handleMove(e) {
+      // 获取主图盒子距离窗口距离
+      const phone_box_side = {
+        x: e.target.getBoundingClientRect().left,
+        y: e.target.getBoundingClientRect().top,
+      };
+
+      // 因为要一直让鼠标保持在蒙版中间,所以计算蒙版的一半
+      const mask_half = {
+        x: 200 / 2,
+        y: 200 / 2,
+      };
+
+      // 鼠标位置 - 放大镜到视口距离 - 蒙版一半 = 蒙版现在的位置
+      const mask_side = {
+        x: e.clientX - phone_box_side.x - mask_half.x,
+        y: e.clientY - phone_box_side.y - mask_half.y,
+      };
+
+      if (mask_side.x >= 200) {
+        mask_side.x = 200;
+      } else if (mask_side.x <= 0) {
+        mask_side.x = 0;
+      }
+      if (mask_side.y >= 200) {
+        mask_side.y = 200;
+      } else if (mask_side.y <= 0) {
+        mask_side.y = 0;
+      }
+      // 赋值
+      this.maskX = mask_side.x + "px";
+      this.maskY = mask_side.y + "px";
+
+      //计算大图移动的位置
+      //比例:大图区域 - 大图的大小(也就是大图可以走的距离) / 小图区域 - 蒙版的大小(也就是小图可以移动的距离)
+      let scale = (400 - 800) / (400 - 200);
+
+      // 大图走动的位置
+      this.bigImgX = mask_side.x * scale + "px";
+      this.bigImgY = mask_side.y * scale + "px";
     },
   },
 };
@@ -71,8 +122,8 @@ export default {
       max-width: 200%;
       height: 200%;
       position: absolute;
-      left: 0;
-      top: 0;
+      // left: 50px;
+      // top: 20px;
     }
   }
 
