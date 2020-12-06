@@ -10,6 +10,9 @@ import getUserTempId from "@utils/getUserTempId";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 
+// 防到内存中,性能优化
+const userTempId = getUserTempId();
+
 const instence = axios.create({
   //   baseURL: "http://182.92.128.115/api",
   baseURL: "/api",
@@ -18,8 +21,6 @@ const instence = axios.create({
 
 instence.interceptors.request.use((config) => {
   NProgress.start();
-
-  const userTempId = getUserTempId();
   config.headers.userTempId = userTempId;
   return config;
 });
