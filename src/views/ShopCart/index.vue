@@ -49,6 +49,7 @@
               autocomplete="off"
               type="text"
               :value="allShopCart.skuNum"
+              @blur="blurUpData(allShopCart.skuId, allShopCart.skuNum, $event)"
               minnum="1"
               class="itxt"
             />
@@ -142,6 +143,11 @@ export default {
           this.getCartList();
         }
       });
+    },
+    // 输入数字更新数据
+    blurUpData(skuID, skuNum, e) {
+      // console.log(skuId, skuNum, $event.target.value);
+      this.upShopCart({ skuID, skuNum: e.target.value - skuNum });
     },
   },
   computed: {
