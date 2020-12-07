@@ -3,6 +3,7 @@ import axios from "axios";
 // 提示框
 import { Message } from "element-ui";
 
+import store from "../store";
 // uuid
 import getUserTempId from "@utils/getUserTempId";
 
@@ -22,6 +23,11 @@ const instence = axios.create({
 instence.interceptors.request.use((config) => {
   NProgress.start();
   config.headers.userTempId = userTempId;
+
+  const token = store.state.user.token;
+  if (token) {
+    config.headers.token = token;
+  }
   return config;
 });
 

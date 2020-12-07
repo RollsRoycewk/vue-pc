@@ -7,6 +7,10 @@ import Register from "../views/Register";
 import Search from "../views/Search";
 import ShopCart from "@views/ShopCart";
 import AddCartSuccess from "@views/AddCartSuccess";
+import Center from "@views/Center";
+import Trade from "@views/Trade";
+import Pay from "@views/Pay";
+import PaySuccess from "@views/PaySuccess";
 // 商品详情
 import Detail from "@views/Detail";
 
@@ -86,6 +90,30 @@ export default new VueRouter({
       name: "addCartSuccess",
       path: "/addCartSuccess",
       component: AddCartSuccess,
+    },
+    // 交易界面
+    {
+      name: "trade",
+      path: "/trade",
+      component: Trade,
+    },
+    // 交易界面
+    {
+      name: "center",
+      path: "/center/myorder",
+      component: Center,
+    },
+    // 支付页面
+    {
+      name: "pay",
+      path: "/pay",
+      component: Pay,
+    },
+    // 支付成功
+    {
+      name: "paysuccess",
+      path: "/paysuccess",
+      component: PaySuccess,
     },
   ],
   // 每次切换路由页面滚动条位置
