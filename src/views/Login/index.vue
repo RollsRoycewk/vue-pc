@@ -37,7 +37,12 @@
               </div>
               <div class="setting clearFix">
                 <label class="checkbox inline">
-                  <input name="m1" type="checkbox" value="2" checked="" />
+                  <input
+                    name="m1"
+                    type="checkbox"
+                    value="2"
+                    v-model="isAutoLoding"
+                  />
                   自动登录
                 </label>
                 <span class="forget">忘记密码？</span>
@@ -81,7 +86,7 @@
 <script>
 import { ValidationProvider, extend } from "vee-validate";
 import { required } from "vee-validate/dist/rules";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 extend("required", {
   ...required,
@@ -93,6 +98,7 @@ extend("length", {
   },
   message: "客官,留下你的联系方式",
 });
+
 export default {
   name: "Login",
   data() {
@@ -103,10 +109,18 @@ export default {
       },
       // 性能优化,如果正在登录则不让发送请求
       isLoding: false,
+      // 自动登录
+      isAutoLoding: true,
     };
   },
   components: {
     ValidationProvider,
+  },
+  computed: {
+    ...mapState({
+      name: (state) => state.user.name,
+      token: (state) => state.user.token,
+    }),
   },
   methods: {
     ...mapActions(["userLoginAsync"]),
@@ -117,11 +131,21 @@ export default {
         this.isLoding = true;
         let { phone, password } = this.user;
         await this.userLoginAsync({ phone, password });
+        // 登录成功, 如果开启了自动登录保存name和token;
+        if (this.isAutoLoding) {
+          localStorage.setItem("name", this.name);
+          localStorage.setItem("token", this.token);
+        }
         this.$router.replace("/");
       } catch {
         this.isLoding = false;
       }
     },
+  },
+  created() {
+    if (this.token) {
+      this.$router.replace("/");
+    }
   },
 };
 </script>

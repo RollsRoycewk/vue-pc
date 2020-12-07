@@ -2,8 +2,8 @@ import { reqRegisterAsync, reqUserLoginAsync } from "@api/use";
 
 export default {
   state: {
-    name: "",
-    token: "",
+    name: localStorage.getItem("name") || "",
+    token: localStorage.getItem("token") || "",
   },
   getters: {},
   actions: {
