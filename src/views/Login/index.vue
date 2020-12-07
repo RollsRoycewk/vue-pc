@@ -15,13 +15,25 @@
 
           <div class="content">
             <form action="##">
-              <div class="input-text clearFix">
-                <span></span>
-                <input type="text" placeholder="邮箱/用户名/手机号" />
-              </div>
+              <ValidationProvider v-slot="{ errors }" rules="required|length">
+                <div class="input-text clearFix">
+                  <span></span>
+                  <input
+                    type="text"
+                    placeholder="邮箱/用户名/手机号"
+                    v-model="user.phone"
+                  />
+                  <p :style="{ color: 'red' }">{{ errors[0] }}</p>
+                </div>
+              </ValidationProvider>
+
               <div class="input-text clearFix">
                 <span class="pwd"></span>
-                <input type="text" placeholder="请输入密码" />
+                <input
+                  type="text"
+                  placeholder="请输入密码"
+                  v-model="user.password"
+                />
               </div>
               <div class="setting clearFix">
                 <label class="checkbox inline">
@@ -67,8 +79,32 @@
 </template>
 
 <script>
+import { ValidationProvider, extend } from "vee-validate";
+import { required } from "vee-validate/dist/rules";
+
+extend("required", {
+  ...required,
+  message: "客官,留下你的联系方式",
+});
+extend("length", {
+  validate(val) {
+    return val.length === 11;
+  },
+  message: "客官,留下你的联系方式",
+});
 export default {
   name: "Login",
+  data() {
+    return {
+      user: {
+        phone: "",
+        password: "",
+      },
+    };
+  },
+  components: {
+    ValidationProvider,
+  },
 };
 </script>
 
