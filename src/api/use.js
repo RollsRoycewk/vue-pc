@@ -1,21 +1,25 @@
-import instenceRequest from "@utils/request";
+import request from "@utils/request";
 
-export const loginAsync = function({ phone, password }) {
-  instenceRequest({
+// export const loginAsync = function({ phone, password }) {
+//   request({
+//     method: "POST",
+//     url: "/user/passport/login",
+//     data: {
+//       phone,
+//       password,
+//     },
+//   });
+// };
+
+// 注册接口
+export const reqRegisterAsync = ({ phone, password, code }) => {
+  return request({
     method: "POST",
-    url: "/user/passport/login",
+    url: "/user/passport/register",
     data: {
       phone,
       password,
+      code,
     },
-  })
-    .then((result) => {
-      console.log("成功", result);
-      return result;
-    })
-    .catch((err) => {
-      //   console.dir(err);
-      //   return err.message || "网络错误";
-      console.log("失败", err);
-    });
+  });
 };

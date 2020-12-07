@@ -79,6 +79,7 @@
 <script>
 import { ValidationProvider, extend } from "vee-validate";
 import { required } from "vee-validate/dist/rules";
+import { mapActions } from "vuex";
 
 // 必填
 extend("required", {
@@ -120,27 +121,39 @@ export default {
     ValidationProvider,
   },
   methods: {
+    ...mapActions(["registerAsync"]),
     // 点击提交按钮
-    handleRegister() {
-      // 点击提前按钮,收集表单数据,进行数据效验,发送请求
-      let { phone, password, repassword, code, isAgree } = this.user;
+    async handleRegister() {
+      try {
+        // 点击提前按钮,收集表单数据,进行数据效验,发送请求
+        let { phone, password, repassword, code, isAgree } = this.user;
 
-      // 登录按钮
-      if (!isAgree) {
-        this.$message("客官,请同意我们的霸王条约");
-        return;
-      }
-      // 密码是否一致
-      if (password !== repassword) {
-        this.$message("两次密码输入不一致");
-        return;
-      }
+        // 登录按钮
+        if (!isAgree) {
+          this.$message("客官,请同意我们的霸王条约");
+          return;
+        }
+        // 密码是否一致
+        if (password !== repassword) {
+          this.$message("两次密码输入不一致");
+          return;
+        }
 
-      console.log(phone, password, repassword, code, isAgree);
+        // 跳转,进行登录
+        await this.registerAsync({ phone, password, code });
+        this.$router.push("/login");
+
+        // console.log(phone, password, repassword, code, isAgree);
+      } catch {
+        this.user.password = "";
+        this.user.repassword = "";
+        // 更新二维码
+        this.renovateCode();
+      }
     },
     // 切换验证码
-    renovateCode(e) {
-      e.target.src = "http://182.92.128.115/api/user/passport/code";
+    renovateCode() {
+      this.$refs.code.src = "http://182.92.128.115/api/user/passport/code";
     },
   },
 };
