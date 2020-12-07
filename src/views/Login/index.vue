@@ -14,7 +14,7 @@
           </ul>
 
           <div class="content">
-            <form action="##">
+            <form @submit.prevent="handleUserLogin">
               <ValidationProvider v-slot="{ errors }" rules="required|length">
                 <div class="input-text clearFix">
                   <span></span>
@@ -81,6 +81,7 @@
 <script>
 import { ValidationProvider, extend } from "vee-validate";
 import { required } from "vee-validate/dist/rules";
+import { mapActions } from "vuex";
 
 extend("required", {
   ...required,
@@ -100,10 +101,27 @@ export default {
         phone: "",
         password: "",
       },
+      // 性能优化,如果正在登录则不让发送请求
+      isLoding: false,
     };
   },
   components: {
     ValidationProvider,
+  },
+  methods: {
+    ...mapActions(["userLoginAsync"]),
+
+    async handleUserLogin() {
+      try {
+        if (this.isLoding) return;
+        this.isLoding = true;
+        let { phone, password } = this.user;
+        await this.userLoginAsync({ phone, password });
+        this.$router.replace("/");
+      } catch {
+        this.isLoding = false;
+      }
+    },
   },
 };
 </script>
