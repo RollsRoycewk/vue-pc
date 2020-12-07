@@ -26,8 +26,9 @@
           ref="code"
           src="http://182.92.128.115/api/user/passport/code"
           alt="code"
+          @click="renovateCode"
         />
-        <span class="error-msg">错误提示信息</span>
+        <!-- <span class="error-msg">错误提示信息</span> -->
       </div>
       <div class="content">
         <label>登录密码:</label>
@@ -36,7 +37,7 @@
           placeholder="请输入你的登录密码"
           v-model="user.password"
         />
-        <span class="error-msg">错误提示信息</span>
+        <!-- <span class="error-msg">错误提示信息</span> -->
       </div>
       <div class="content">
         <label>确认密码:</label>
@@ -45,15 +46,15 @@
           placeholder="请输入确认密码"
           v-model="user.repassword"
         />
-        <span class="error-msg">错误提示信息</span>
+        <!-- <span class="error-msg">错误提示信息</span> -->
       </div>
       <div class="controls">
         <input name="m1" type="checkbox" v-model="user.isAgree" />
         <span>同意协议并注册《尚品汇用户协议》</span>
-        <span class="error-msg">错误提示信息</span>
+        <!-- <span class="error-msg">错误提示信息</span> -->
       </div>
       <div class="btn">
-        <button>完成注册</button>
+        <button @click="handleRegister">完成注册</button>
       </div>
     </div>
 
@@ -117,6 +118,30 @@ export default {
   },
   components: {
     ValidationProvider,
+  },
+  methods: {
+    // 点击提交按钮
+    handleRegister() {
+      // 点击提前按钮,收集表单数据,进行数据效验,发送请求
+      let { phone, password, repassword, code, isAgree } = this.user;
+
+      // 登录按钮
+      if (!isAgree) {
+        this.$message("客官,请同意我们的霸王条约");
+        return;
+      }
+      // 密码是否一致
+      if (password !== repassword) {
+        this.$message("两次密码输入不一致");
+        return;
+      }
+
+      console.log(phone, password, repassword, code, isAgree);
+    },
+    // 切换验证码
+    renovateCode(e) {
+      e.target.src = "http://182.92.128.115/api/user/passport/code";
+    },
   },
 };
 </script>
