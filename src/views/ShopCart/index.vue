@@ -52,6 +52,7 @@
               @blur="blurUpData(allShopCart.skuId, allShopCart.skuNum, $event)"
               minnum="1"
               class="itxt"
+              @input="formatSkuNum"
             />
             <button
               href="javascript:void(0)"
@@ -148,6 +149,17 @@ export default {
     blurUpData(skuID, skuNum, e) {
       // console.log(skuId, skuNum, $event.target.value);
       this.upShopCart({ skuID, skuNum: e.target.value - skuNum });
+    },
+    // 输入框输入数据效验
+    formatSkuNum(e) {
+      let num = e.target.value.replace(/\D+/g, "");
+      if (num <= 0) {
+        num = 1;
+      }
+      if (num >= 10) {
+        num = 10;
+      }
+      e.target.value = num;
     },
   },
   computed: {
