@@ -37,12 +37,14 @@
             <span class="price">{{ allShopCart.skuPrice }}</span>
           </li>
           <li class="cart-list-con5">
-            <a
+            <button
               href="javascript:void(0)"
               class="mins"
               @click="cartUpData(allShopCart.skuId, -1)"
-              >-</a
+              :disabled="allShopCart.skuNum === 1"
             >
+              -
+            </button>
             <input
               autocomplete="off"
               type="text"
@@ -50,12 +52,14 @@
               minnum="1"
               class="itxt"
             />
-            <a
+            <button
               href="javascript:void(0)"
               class="plus"
               @click="cartUpData(allShopCart.skuId, 1)"
-              >+</a
+              :disabled="allShopCart.skuNum === 10"
             >
+              +
+            </button>
           </li>
           <li class="cart-list-con6">
             <span class="sum">{{
