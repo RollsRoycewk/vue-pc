@@ -19,7 +19,7 @@
         <p>
           <span class="s1">{{ userAddress.userAddress }}</span>
           <span class="s2">{{ userAddress.phoneNum }}</span>
-          <span class="s3">默认地址</span>
+          <span class="s3" v-if="+userAddress.isDefault">默认地址</span>
         </p>
       </div>
       <div class="line"></div>
