@@ -125,7 +125,7 @@ const router = new VueRouter({
   },
 });
 
-const authority = ["/pay", "/paysuccess", "/trade", "/shopcart"];
+const authority = ["/pay", "/paysuccess", "/trade", "/center/myorder"];
 
 router.beforeEach((to, form, next) => {
   // console.log(to, form);
