@@ -98,7 +98,7 @@
 <script>
 import QRCode from "qrcode";
 
-import { reqCreateNative } from "@api/pay";
+import { reqCreateNative, reqQueryPayStatus } from "@api/pay";
 
 export default {
   name: "Pay",
@@ -120,6 +120,13 @@ export default {
                 type: "success",
                 message: "支付成功!",
               });
+              reqQueryPayStatus(this.$route.query.orderId)
+                .then(() => {
+                  this.$router.push("/paysuccess");
+                })
+                .catch((error) => {
+                  alert(error);
+                });
             })
             .catch(() => {
               this.$message({
