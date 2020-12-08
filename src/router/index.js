@@ -93,6 +93,16 @@ const router = new VueRouter({
       name: "addCartSuccess",
       path: "/addCartSuccess",
       component: AddCartSuccess,
+      // 路由独享守卫
+      beforeEnter: (to, from, next) => {
+        // 需求：只有添加了购物车才能进行，没有添加就去购物车页面
+        // console.log(to, from, next);
+        // 1. 从detail过来 2. 有数据
+        if (from.name === "detail") {
+          return next();
+        }
+        next("/login");
+      },
     },
     // 交易界面
     {
