@@ -98,7 +98,7 @@
           <i class="summoney">{{ allPrice }}</i>
         </div>
         <div class="sumbtn">
-          <a class="sum-btn" href="###" target="_blank">结算</a>
+          <a class="sum-btn" target="_blank" @click="handleSubmit">结算</a>
         </div>
       </div>
     </div>
@@ -160,6 +160,10 @@ export default {
         num = 10;
       }
       e.target.value = num;
+    },
+    // 跳转到支付页面
+    handleSubmit() {
+      this.$router.push("/trade");
     },
   },
   computed: {
