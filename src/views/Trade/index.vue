@@ -65,6 +65,7 @@
         <textarea
           placeholder="建议留言前先与商家沟通确认"
           class="remarks-cont"
+          v-model="orderComment"
         ></textarea>
       </div>
       <div class="line"></div>
@@ -105,13 +106,13 @@
       </div>
     </div>
     <div class="sub clearFix">
-      <router-link class="subBtn" to="/pay">提交订单</router-link>
+      <button class="subBtn" @click="handleSubmit">提交订单</button>
     </div>
   </div>
 </template>
 
 <script>
-import { reqTradeData } from "@api/pay";
+import { reqTradeData, reqSubmitOrder } from "@api/pay";
 
 export default {
   name: "Trade",
@@ -121,6 +122,7 @@ export default {
       tradeData: {},
       // 默认选中
       selectedUserAddRess: -1,
+      orderComment: "",
     };
   },
   async mounted() {
@@ -129,6 +131,29 @@ export default {
     this.selectedUserAddRess = this.tradeData.userAddressList.find((trade) => {
       return trade.isDefault === "1";
     }).id;
+  },
+  methods: {
+    async handleSubmit() {
+      let { tradeNo, detailArrayList } = this.tradeData;
+      let { consignee, phoneNum, userAddress } = this.comAddRess;
+
+      let res = await reqSubmitOrder({
+        traderNo: tradeNo,
+        consignee: consignee,
+        consigneeTel: phoneNum,
+        deliveryAddress: userAddress,
+        paymentWay: "ONLINE",
+        orderComment: this.orderComment,
+        orderDetailList: detailArrayList,
+      });
+
+      this.$router.push({
+        name: "pay",
+        query: {
+          orderId: res,
+        },
+      });
+    },
   },
   computed: {
     comAddRess() {

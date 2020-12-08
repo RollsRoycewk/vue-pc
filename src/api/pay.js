@@ -7,3 +7,27 @@ export const reqTradeData = () => {
     url: "/order/auth/trade",
   });
 };
+
+// 提交订单
+export const reqSubmitOrder = ({
+  traderNo,
+  consignee,
+  consigneeTel,
+  deliveryAddress,
+  paymentWay,
+  orderComment,
+  orderDetailList,
+}) => {
+  return request({
+    method: "POST",
+    url: `/order/auth/submitOrder?tradeNo=${traderNo}`,
+    data: {
+      consignee,
+      consigneeTel,
+      deliveryAddress,
+      paymentWay,
+      orderComment,
+      orderDetailList,
+    },
+  });
+};
