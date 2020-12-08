@@ -8,7 +8,14 @@
         v-for="userAddress in tradeData.userAddressList"
         :key="userAddress.id"
       >
-        <span class="username selected">{{ userAddress.consignee }}</span>
+        <span
+          :class="{
+            username: true,
+            selected: userAddress.id === selectedUserAddRess,
+          }"
+          @click="selectedUserAddRess = userAddress.id"
+          >{{ userAddress.consignee }}</span
+        >
         <p>
           <span class="s1">{{ userAddress.userAddress }}</span>
           <span class="s2">{{ userAddress.phoneNum }}</span>
@@ -110,7 +117,10 @@ export default {
   name: "Trade",
   data() {
     return {
+      // trade数据
       tradeData: {},
+      // 默认选中
+      selectedUserAddRess: 1,
     };
   },
   async mounted() {
