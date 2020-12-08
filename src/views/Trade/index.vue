@@ -99,9 +99,9 @@
       </div>
       <div class="receiveInfo">
         寄送至:
-        <span>北京市昌平区宏福科技园综合楼6层</span>
-        收货人：<span>张三</span>
-        <span>15010658793</span>
+        <span>{{ comAddRess.userAddress }}</span>
+        收货人：<span>{{ comAddRess.consignee }}</span>
+        <span>{{ comAddRess.phoneNum }}</span>
       </div>
     </div>
     <div class="sub clearFix">
@@ -129,6 +129,20 @@ export default {
     this.selectedUserAddRess = this.tradeData.userAddressList.find((trade) => {
       return trade.isDefault === "1";
     }).id;
+  },
+  computed: {
+    comAddRess() {
+      let {
+        selectedUserAddRess,
+        tradeData: { userAddressList },
+      } = this;
+
+      return userAddressList
+        ? userAddressList.find(
+            (userAddress) => userAddress.id === selectedUserAddRess
+          )
+        : {};
+    },
   },
 };
 </script>
