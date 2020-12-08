@@ -120,11 +120,15 @@ export default {
       // trade数据
       tradeData: {},
       // 默认选中
-      selectedUserAddRess: 1,
+      selectedUserAddRess: -1,
     };
   },
   async mounted() {
     this.tradeData = await reqTradeData();
+    // 默认选中地址
+    this.selectedUserAddRess = this.tradeData.userAddressList.find((trade) => {
+      return trade.isDefault === "1";
+    }).id;
   },
 };
 </script>
