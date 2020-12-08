@@ -1,6 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+// 引入store,为了读取token
+import store from "@store";
+
 import Home from "../views/Home";
 import Login from "../views/Login";
 import Register from "../views/Register";
@@ -48,7 +51,7 @@ VueRouter.prototype.replace = function(
   return replace.call(this, location, onComplete, onAbort);
 };
 
-export default new VueRouter({
+const router = new VueRouter({
   routes: [
     {
       path: "/",
@@ -121,3 +124,27 @@ export default new VueRouter({
     return { x: 0, y: 0 };
   },
 });
+
+const authority = ["/pay", "/paysuccess", "/trade", "/shopcart"];
+
+router.beforeEach((to, form, next) => {
+  // console.log(to, form);
+  // if (authority.indexOf(to.path) > -1) {
+  //   // 包含了,就要判断是否有token
+  //   if (store.state.user.token) {
+  //     next();
+  //   } else {
+  //     next("/login");
+  //   }
+  // } else {
+  //   // 不包含,想去哪就去哪
+  //   next();
+  // }
+
+  if (authority.indexOf(to.path) > -1 && !store.state.user.token) {
+    return next("/login");
+  }
+  next();
+});
+
+export default router;
