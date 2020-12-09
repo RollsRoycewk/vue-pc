@@ -4,16 +4,28 @@ import VueRouter from "vue-router";
 // 引入store,为了读取token
 import store from "@store";
 
-import Home from "../views/Home";
-import Login from "../views/Login";
-import Register from "../views/Register";
-import Search from "../views/Search";
-import ShopCart from "@views/ShopCart";
-import AddCartSuccess from "@views/AddCartSuccess";
-import Center from "@views/Center";
-import Trade from "@views/Trade";
-import Pay from "@views/Pay";
-import PaySuccess from "@views/PaySuccess";
+// import Home from "../views/Home";
+// import Login from "../views/Login";
+// import Register from "../views/Register";
+// import Search from "../views/Search";
+// import ShopCart from "@views/ShopCart";
+// import AddCartSuccess from "@views/AddCartSuccess";
+// import Center from "@views/Center";
+// import Trade from "@views/Trade";
+// import Pay from "@views/Pay";
+// import PaySuccess from "@views/PaySuccess";
+
+const Home = () => import("../views/Home");
+const Login = () => import("../views/Login");
+const Register = () => import("../views/Register");
+const Search = () => import("../views/Search");
+const ShopCart = () => import("../views/ShopCart");
+const AddCartSuccess = () => import("../views/AddCartSuccess");
+const Center = () => import("../views/Center");
+const Trade = () => import("../views/Trade");
+const Pay = () => import("../views/Pay");
+const PaySuccess = () => import("../views/PaySuccess");
+
 // 商品详情
 import Detail from "@views/Detail";
 
