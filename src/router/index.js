@@ -15,16 +15,20 @@ import store from "@store";
 // import Pay from "@views/Pay";
 // import PaySuccess from "@views/PaySuccess";
 
-const Home = () => import("../views/Home");
-const Login = () => import("../views/Login");
-const Register = () => import("../views/Register");
-const Search = () => import("../views/Search");
-const ShopCart = () => import("../views/ShopCart");
-const AddCartSuccess = () => import("../views/AddCartSuccess");
-const Center = () => import("../views/Center");
-const Trade = () => import("../views/Trade");
-const Pay = () => import("../views/Pay");
-const PaySuccess = () => import("../views/PaySuccess");
+const Home = () => import(/* webpackChunkName: "Home" */ "../views/Home");
+const Login = () => import(/* webpackChunkName: "Login" */ "../views/Login");
+const Register = () =>
+  import(/* webpackChunkName: "Register" */ "../views/Register");
+const Search = () => import(/* webpackChunkName: "Search" */ "../views/Search");
+const ShopCart = () =>
+  import(/* webpackChunkName: "ShopCart" */ "../views/ShopCart");
+const AddCartSuccess = () =>
+  import(/* webpackChunkName: "AddCartSuccess" */ "../views/AddCartSuccess");
+const Center = () => import(/* webpackChunkName: "Center" */ "../views/Center");
+const Trade = () => import(/* webpackChunkName: "Trade" */ "../views/Trade");
+const Pay = () => import(/* webpackChunkName: "Pay" */ "../views/Pay");
+const PaySuccess = () =>
+  import(/* webpackChunkName: "PaySuccess" */ "../views/PaySuccess");
 
 // 商品详情
 import Detail from "@views/Detail";
