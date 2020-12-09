@@ -11,12 +11,15 @@ import getUserTempId from "@utils/getUserTempId";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 
+console.log(process.env.NODE_ENV); // development  production(serve -s dist)
 // 防到内存中,性能优化
 const userTempId = getUserTempId();
 
+let baseUrlCheck =
+  process.env.NODE_ENV === "development" ? "/" : "http://182.92.128.115/";
 const instence = axios.create({
-  //   baseURL: "http://182.92.128.115/api",
-  baseURL: "/api",
+  baseURL: `${baseUrlCheck}api`,
+  // baseURL: "/api",
   //   headers:{}
 });
 
