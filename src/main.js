@@ -14,6 +14,8 @@ import "./styles/reset.css";
 // 引入图标字体样式
 import "./styles/iconfont.css";
 import "./plugins/element.js";
+// 引入图片懒加载
+import "./plugins/lazyLoad.js";
 // 性能优化
 import "swiper/swiper-bundle.min.css";
 
