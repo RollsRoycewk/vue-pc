@@ -168,7 +168,7 @@
             <!-- elmentUI 分页器 -->
             <div class="block">
               <!-- <span class="demonstration">完整功能</span> -->
-              <el-pagination
+              <!-- <el-pagination
                 background
                 :pager-count="5"
                 @size-change="handleSizeChange"
@@ -179,7 +179,15 @@
                 layout=" prev, pager, next, jumper,total, sizes"
                 :total="total"
               >
-              </el-pagination>
+              </el-pagination> -->
+
+              <Pagination
+                @handleCurrentChange="handleCurrentChange"
+                :current-page="options.pageNo"
+                :pager-count="5"
+                :page-size="5"
+                :total="total"
+              />
             </div>
           </div>
         </div>
@@ -191,6 +199,8 @@
 <script>
 import SearchSelector from "./SearchSelector/SearchSelector";
 import { mapGetters, mapActions } from "vuex";
+// 自定义分页器
+import Pagination from "@components/Pagination";
 
 import TypeNav from "@components/TypeNav";
 
@@ -358,6 +368,7 @@ export default {
   components: {
     SearchSelector,
     TypeNav,
+    Pagination,
   },
 };
 </script>
