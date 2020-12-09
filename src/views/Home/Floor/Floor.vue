@@ -24,7 +24,7 @@
                   {{ keyword }}
                 </li>
               </ul>
-              <img :src="flooritem.imgUrl" />
+              <img v-lazy="flooritem.imgUrl" />
             </div>
             <div class="floorBanner">
               <Carousel :slideshowList="flooritem.carouselList" />
@@ -32,22 +32,22 @@
             <div class="split">
               <span class="floor-x-line"></span>
               <div class="floor-conver-pit">
-                <img :src="flooritem.recommendList[0]" />
+                <img v-lazy="flooritem.recommendList[0]" />
               </div>
               <div class="floor-conver-pit">
-                <img :src="flooritem.recommendList[1]" />
+                <img v-lazy="flooritem.recommendList[1]" />
               </div>
             </div>
             <div class="split center">
-              <img :src="flooritem.bigImg" />
+              <img v-lazy="flooritem.bigImg" />
             </div>
             <div class="split">
               <span class="floor-x-line"></span>
               <div class="floor-conver-pit">
-                <img :src="flooritem.recommendList[2]" />
+                <img v-lazy="flooritem.recommendList[2]" />
               </div>
               <div class="floor-conver-pit">
-                <img :src="flooritem.recommendList[3]" />
+                <img v-lazy="flooritem.recommendList[3]" />
               </div>
             </div>
           </div>
